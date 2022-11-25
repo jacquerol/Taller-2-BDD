@@ -13,6 +13,7 @@ namespace taller2base
 {
     class DatabaseUtils
     {
+        /* Codigo obsoleto
         public static int checkFields(TextBox[] fields)
         {
             for(int i = 0; i < fields.Length; i++)
@@ -64,5 +65,6 @@ namespace taller2base
             }
             conex.close();
         }
+        */
     }
 }
