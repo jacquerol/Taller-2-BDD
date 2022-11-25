@@ -107,7 +107,7 @@ namespace taller2base
             this.MinimizeBox = false;
             this.Name = "ModularForm";
             this.Text = "Ingreso de datos";
-            this.Load += new System.EventHandler(this.on_load);
+            //this.Load += new System.EventHandler(this.OnLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 

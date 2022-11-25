@@ -12,7 +12,76 @@ using WindowsFormsApp1;
 namespace taller2base
 {
     class DatabaseUtils
-    {
+    {   
+        
+        /**
+         * Recibe dos listas paralelas e imprime nombre y dato
+         **/
+        public void Display(string[] tipoDato, string[] dato)
+        {
+            if (tipoDato.Length != dato.Length) return;
+            string mensaje = "";
+            for(int i = 0; i < tipoDato.Length; i++)
+            {
+                mensaje += tipoDato[i] + ": " + dato[i] + "\n";
+            }
+        }
+        /**
+         * Inserta o actualiza un valor
+         **/
+        public void Modificar(string query)
+        {
+            try
+            {
+                ConexMySQL conex = new ConexMySQL(); conex.open();
+                conex.executeNonQuery(query); conex.close();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error de tipo : " + ex.Message);
+            }
+        }
+        /**
+         * Selecciona un solo dato de una columna
+         **/
+        public string GetDato(string query)
+        {
+            try
+            {
+                ConexMySQL conex = new ConexMySQL(); conex.open();
+                string resultado = conex.selectQueryScalar("query"); conex.close();
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hubo un error de tipo " + ex.Message, "Error");
+            }
+            return null;
+        }
+        /**
+         * Selecciona multiples columnas
+         **/
+        public DataTable GetTabla(string query)
+        {
+            try
+            {
+                DataTable tabla = new DataTable();
+                ConexMySQL conex = new ConexMySQL(); conex.open();
+                DataTable resultado = conex.selectQuery("query"); conex.close();
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hubo un error de tipo " + ex.Message, "Error");
+            }
+            return null;
+        }
+        /**
+         * Retorna el listado completo del elemento dado
+         **/
+        public DataTable GetListado(string tipoDato) { return GetTabla("SELECT * FROM " + tipoDato); }
+
         /* Codigo obsoleto
         public static int checkFields(TextBox[] fields)
         {

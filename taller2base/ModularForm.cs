@@ -49,6 +49,7 @@ namespace taller2base
         {
             this.DialogResult = DialogResult.Cancel;
         }
+        /*
         private void on_load(object sender, EventArgs e)
         {
             if (this.SQLDataColumnType == "ingresarManual")
@@ -102,5 +103,6 @@ namespace taller2base
             
 
         }
+        */
     }
 }
