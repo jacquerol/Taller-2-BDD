@@ -10,19 +10,8 @@ CREATE TABLE VENDEDOR (
   numEmpleado       int(10) NOT NULL, 
   nombre            varchar(255) NOT NULL, 
   salario           int(10) NOT NULL, 
-  fechaContratacion date NOT NULL, 
+  fechaContratacion DATE NOT NULL, 
   PRIMARY KEY (numEmpleado));
-
-CREATE TABLE ORDEN (
-  idOrden             int(10) NOT NULL, 
-  fecha               date NOT NULL,
-  porcentajeDescuento int(10) NOT NULL,
-  montoTotalFinal     int(10) NOT NULL, 
-  numEmpleadoVendedor int(10) NOT NULL,
-  rutCliente 		  varchar(255) NOT NULL,
-  PRIMARY KEY (idOrden),
-  FOREIGN KEY (numEmpleadoVendedor) REFERENCES VENDEDOR(numEmpleado),
-  FOREIGN KEY(rutCliente) REFERENCES CLIENTE(rut));
 
 CREATE TABLE CATEGORIA (
   id     int(10) NOT NULL AUTO_INCREMENT, 
@@ -38,11 +27,22 @@ CREATE TABLE PRODUCTO (
   idCategoria  int(10) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (idCategoria) REFERENCES CATEGORIA(id));
+
+CREATE TABLE ORDEN (
+  idOrden             int(10) NOT NULL, 
+  fecha               date NOT NULL,
+  porcentajeDescuento int(10) NOT NULL,
+  montoTotalFinal     int(10) NOT NULL, 
+  numEmpleadoVendedor int(10) NOT NULL,
+  rutCliente 		  varchar(255) NOT NULL,
+  PRIMARY KEY (idOrden),
+  FOREIGN KEY (numEmpleadoVendedor) REFERENCES VENDEDOR(numEmpleado),
+  FOREIGN KEY(rutCliente) REFERENCES CLIENTE(rut));
   
 CREATE TABLE PROVEEDOR (
   rut       varchar(255) NOT NULL UNIQUE, 
   nombre    varchar(255) NOT NULL, 
-  direccion varchar(255) NOT NULL, 
+  direccion varchar(255) NOT NULL,
   PRIMARY KEY (rut));
   
   CREATE TABLE ORDENPRODUCTO (
@@ -59,3 +59,62 @@ CREATE TABLE PROVEEDOR (
   FOREIGN KEY (rutProveedor) REFERENCES PROVEEDOR(rut),
   FOREIGN KEY (idProducto) REFERENCES PRODUCTO(id));
   
+INSERT INTO CLIENTE (rut, nombre, saldo, direccion, telefono) VALUES ('19951969-7','Andrea',9999999,'angamos','94841853');
+INSERT INTO CLIENTE (rut, nombre, saldo, direccion, telefono) VALUES ('20936459-K','Nicolás',9999999,'sierra nevada','57843746');
+INSERT INTO CLIENTE (rut, nombre, saldo, direccion, telefono) VALUES ('11111111-1','Pedro',20000,'el roble','75686857');
+INSERT INTO CLIENTE (rut, nombre, saldo, direccion, telefono) VALUES ('22222222-2','Juan',1000,'pedro aguirre cerda','85766556');
+INSERT INTO CLIENTE (rut, nombre, saldo, direccion, telefono) VALUES ('33333333-3','Diego',100000,'caparrosa','90988776');
+INSERT INTO CLIENTE (rut, nombre, saldo, direccion, telefono) VALUES ('44444444-4','Ignacio',0,'félix garcía','86968676');
+INSERT INTO CLIENTE (rut, nombre, saldo, direccion, telefono) VALUES ('55555555-5','Felipe',9999,'matta','85543423');
+
+INSERT INTO CATEGORIA (ID,nombre,descripcion) VALUES(1,'Electrodomésticos','Productos eléctricos que se utilizan en el hogar');
+INSERT INTO CATEGORIA (ID,nombre,descripcion) VALUES(2,'Higiene Personal','Productos para la higiene personal');
+INSERT INTO CATEGORIA (ID,nombre,descripcion) VALUES(3,'Comida','Comida de cualquier tipo');
+INSERT INTO CATEGORIA (ID,nombre,descripcion) VALUES(4,'Cocina','Productos de uso en la cocina');
+INSERT INTO CATEGORIA (ID,nombre,descripcion) VALUES(5,'Hogar','Productos para el hogar, como alfombras, muebles, adornos, etc.');
+INSERT INTO CATEGORIA (ID,nombre,descripcion) VALUES(6,'Papelería','Productos de papelería para estudiantes');
+INSERT INTO CATEGORIA (ID,nombre,descripcion) VALUES(7,'Tecnología','Productos de tecnología como celulares, tablets, audífonos. etc.');
+
+INSERT INTO VENDEDOR (numEmpleado,nombre,salario,fechaContratacion) VALUES(1,'andrea',10,'2020-11-22'); 
+
+INSERT INTO VENDEDOR (numEmpleado,nombre,salario,fechaContratacion) VALUES(2,'camila',110,'2020-12-23');  
+INSERT INTO VENDEDOR (numEmpleado,nombre,salario,fechaContratacion) VALUES(3,'rodrigo',200,'2021-11-30'); 
+INSERT INTO VENDEDOR (numEmpleado,nombre,salario,fechaContratacion) VALUES(4,'maria',100,'2020-08-11'); 
+INSERT INTO VENDEDOR (numEmpleado,nombre,salario,fechaContratacion) VALUES(5,'otis',150,'2019-10-23'); 
+INSERT INTO VENDEDOR (numEmpleado,nombre,salario,fechaContratacion) VALUES(6,'sebastian',120,'2020-10-22'); 
+INSERT INTO VENDEDOR (numEmpleado,nombre,salario,fechaContratacion) VALUES(7,'evelyn',300,'2022-03-08'); 
+
+INSERT INTO ORDEN(idOrden, fecha, porcentajeDescuento, montoTotalFinal, numEmpleadoVendedor, rutCliente) VALUES(1,'2020-01-01',10, 0, 7, '19951969-7');
+INSERT INTO ORDEN(idOrden, fecha, porcentajeDescuento, montoTotalFinal, numEmpleadoVendedor, rutCliente) VALUES(2,'2020-02-01',20, 0, 6, '20936459-K'); 
+INSERT INTO ORDEN(idOrden, fecha, porcentajeDescuento, montoTotalFinal, numEmpleadoVendedor, rutCliente) VALUES(3,'2020-03-01',30, 0, 5, '11111111-1'); 
+INSERT INTO ORDEN(idOrden, fecha, porcentajeDescuento, montoTotalFinal, numEmpleadoVendedor, rutCliente) VALUES(4,'2020-05-01',40, 0, 4, '22222222-2'); 
+INSERT INTO ORDEN(idOrden, fecha, porcentajeDescuento, montoTotalFinal, numEmpleadoVendedor, rutCliente) VALUES(5,'2020-08-01',50, 0, 3, '33333333-3'); 
+INSERT INTO ORDEN(idOrden, fecha, porcentajeDescuento, montoTotalFinal, numEmpleadoVendedor, rutCliente) VALUES(6,'2021-10-01',60, 0, 2, '44444444-4'); 
+INSERT INTO ORDEN(idOrden, fecha, porcentajeDescuento, montoTotalFinal, numEmpleadoVendedor, rutCliente) VALUES(7,'2022-01-01',70, 0, 1, '55555555-5'); 
+
+INSERT INTO PRODUCTO(id, nombre, precioVenta, stock, idCategoria) VALUES(1,'confort',1000, 3, 2);
+INSERT INTO PRODUCTO(id, nombre, precioVenta, stock, idCategoria) VALUES(2,'fideos',2000, 5, 3);
+INSERT INTO PRODUCTO(id, nombre, precioVenta, stock, idCategoria) VALUES(3,'microondas',3000,10, 4);
+INSERT INTO PRODUCTO(id, nombre, precioVenta, stock, idCategoria) VALUES(4,'alfombra',4000,3, 5);
+INSERT INTO PRODUCTO(id, nombre, precioVenta, stock, idCategoria) VALUES(5,'televisión',5000, 6, 7);
+
+INSERT INTO ORDENPRODUCTO(cantidad, idProducto, idOrden) VALUES (2, 2, 1);
+INSERT INTO ORDENPRODUCTO(cantidad, idProducto, idOrden) VALUES (10, 1, 2);
+INSERT INTO ORDENPRODUCTO(cantidad, idProducto, idOrden) VALUES (4, 4, 3);
+INSERT INTO ORDENPRODUCTO(cantidad, idProducto, idOrden) VALUES (3, 2, 4);
+INSERT INTO ORDENPRODUCTO(cantidad, idProducto, idOrden) VALUES (1, 5, 5);
+INSERT INTO ORDENPRODUCTO(cantidad, idProducto, idOrden) VALUES (20, 2, 6);
+INSERT INTO ORDENPRODUCTO(cantidad, idProducto, idOrden) VALUES (6, 1, 7);
+
+INSERT INTO PROVEEDOR(rut, nombre, direccion) VALUES('19765456-7','uwu','pratt');
+INSERT INTO PROVEEDOR(rut, nombre, direccion) VALUES('15675645-0','owo','uribe');
+INSERT INTO PROVEEDOR(rut, nombre, direccion) VALUES('20877676-6','ewe','orella');
+INSERT INTO PROVEEDOR(rut, nombre, direccion) VALUES('20765467-8','unu','argentina');
+INSERT INTO PROVEEDOR(rut, nombre, direccion) VALUES('16987987-9','tot','croacia');
+
+INSERT INTO SUMINISTRA(rutProveedor,idProducto) VALUES ('19765456-7',1);
+INSERT INTO SUMINISTRA(rutProveedor,idProducto) VALUES ('19765456-7',2);
+INSERT INTO SUMINISTRA(rutProveedor,idProducto) VALUES ('19765456-7',3);
+INSERT INTO SUMINISTRA(rutProveedor,idProducto) VALUES ('19765456-7',4);
+INSERT INTO SUMINISTRA(rutProveedor,idProducto) VALUES ('19765456-7',5);
+

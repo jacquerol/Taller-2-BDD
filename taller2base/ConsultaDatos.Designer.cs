@@ -392,6 +392,7 @@ namespace taller2base
             this.vendorComboBox.Name = "vendorComboBox";
             this.vendorComboBox.Size = new System.Drawing.Size(121, 23);
             this.vendorComboBox.TabIndex = 29;
+            this.vendorComboBox.DropDown += new System.EventHandler(this.RellenarVendedor);
             // 
             // label4
             // 

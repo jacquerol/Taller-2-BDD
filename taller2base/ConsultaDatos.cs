@@ -24,13 +24,15 @@ namespace taller2base
 
         public void RellenarVendedor(object sender, EventArgs e)
         {
-            DataTable vendedores = GetListado("vendedor");
+            DataTable vendedores = GetTabla("SELECT NOMBRE FROM VENDEDOR");
             string[] nombreVendedor = new string[vendedores.Rows.Count];
+            MessageBox.Show(nombreVendedor.Length.ToString());
             for(int i = 0; i < vendedores.Rows.Count; i++)
             {
-                nombreVendedor[i] = vendedores.Rows[0][i].ToString();
+                nombreVendedor[i] = vendedores.Rows[i].ToString();
             }
-            RellenarComboBox(vendorComboBox, nombreVendedor);
+            
+            RellenarComboBox((ComboBox)sender, nombreVendedor);
         }
 
         public void DatosPorRut(object sender, KeyPressEventArgs e)
