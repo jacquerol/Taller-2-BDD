@@ -16,17 +16,13 @@ namespace DatabaseUtil
     {   
         
         /**
-         * Recibe dos listas paralelas e imprime nombre y dato
+         * Recibe una DataTable de una sola entidad y despliega sus datos
          **/
         public void DesplegarDatos(DataTable entidadUnica)
         {
             string mensaje = "";
-            for (int i = 0; i < entidadUnica.Columns.Count; i++)
-            {
-                mensaje += entidadUnica.Columns[i].ColumnName + ": " + entidadUnica.Rows[0][i] + "\n";
-            }
-            MessageBox.Show(mensaje);
-
+            for (int i = 0; i < entidadUnica.Columns.Count; i++) {mensaje += entidadUnica.Columns[i].ColumnName.ToUpper() + ": " + entidadUnica.Rows[0][i] + "\n";}
+            MessageBox.Show(mensaje, "Datos de "+entidadUnica.TableName);
         }
         /**
          * Inserta o actualiza un valor
@@ -38,7 +34,6 @@ namespace DatabaseUtil
                 ConexMySQL conex = new ConexMySQL(); conex.open();
                 conex.executeNonQuery(query); conex.close();
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show("Ha ocurrido un error de tipo : " + ex.Message);

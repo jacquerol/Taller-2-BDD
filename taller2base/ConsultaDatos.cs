@@ -27,35 +27,10 @@ namespace taller2base
         public void DatosPorRut(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != ((char)Keys.Enter)) return;
-            string mensaje = "";
-            DataTable cliente = util.GetTabla("SELECT * FROM CLIENTE c WHERE c.rut = '" + rutTextBox.Text + "'");
-            for (int i = 0; i < cliente.Columns.Count; i++)
-            {
-                mensaje += cliente.Columns[i].ColumnName + ": " + cliente.Rows[0][i] + "\n";
-            }
-            MessageBox.Show(mensaje);
-
-            /*
-            try
-            {
-                ConexMySQL conex = new ConexMySQL(); conex.open();
-                string query = "SELECT * FROM CLIENTE c WHERE c.rut = '" + rutTextBox.Text + "'";
-                DataTable cliente = conex.selectQuery(query);
-                conex.close();
-                for (int i = 0; i < cliente.Columns.Count; i++)
-                {
-                    mensaje += cliente.Columns[i].ColumnName + ": " + cliente.Rows[0][i] + "\n";
-                }
-                MessageBox.Show(mensaje);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ha ocurrido un error de tipo " + ex.Message, "Error");
-            }
-            //DataTable cliente = this.util.GetTabla("SELECT * FROM CLIENTE WHERE (cliente.rut = " + rutTextBox.Text + ")");
-            */
+            util.DesplegarDatos(util.GetTabla("SELECT * FROM CLIENTE c WHERE c.rut = '" + rutTextBox.Text + "'"));
         }
+
+
         public void DatosVendedor(object sender, EventArgs e)
         {
 
