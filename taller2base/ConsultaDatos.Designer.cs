@@ -95,7 +95,6 @@ namespace taller2base
             this.VendorButton.TabIndex = 18;
             this.VendorButton.Text = "Vendedores de mayor y menor antiguedad";
             this.VendorButton.UseVisualStyleBackColor = true;
-            //this.VendorButton.Click += new System.EventHandler(this.clientSalesThisYear);
             // 
             // groupBox1
             // 
@@ -240,6 +239,7 @@ namespace taller2base
             this.rutTextBox.Name = "rutTextBox";
             this.rutTextBox.Size = new System.Drawing.Size(118, 23);
             this.rutTextBox.TabIndex = 46;
+            this.rutTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.datosPorRut);
             // 
             // label12
             // 

@@ -1,1 +1,61 @@
-﻿
+﻿CREATE TABLE CLIENTE (
+  rut            varchar(255) NOT NULL, 
+  nombre         varchar(255) NOT NULL, 
+  saldo          int(10) NOT NULL, 
+  direccion      varchar(255) NOT NULL, 
+  telefono       varchar(255) NOT NULL UNIQUE, 
+  PRIMARY KEY (rut));
+
+CREATE TABLE VENDEDOR (
+  numEmpleado       int(10) NOT NULL, 
+  nombre            varchar(255) NOT NULL, 
+  salario           int(10) NOT NULL, 
+  fechaContratacion date NOT NULL, 
+  PRIMARY KEY (numEmpleado));
+
+CREATE TABLE ORDEN (
+  idOrden             int(10) NOT NULL, 
+  fecha               date NOT NULL,
+  porcentajeDescuento int(10) NOT NULL,
+  montoTotalFinal     int(10) NOT NULL, 
+  numEmpleadoVendedor int(10) NOT NULL,
+  rutCliente 		  varchar(255) NOT NULL,
+  PRIMARY KEY (idOrden),
+  FOREIGN KEY (numEmpleadoVendedor) REFERENCES VENDEDOR(numEmpleado),
+  FOREIGN KEY(rutCliente) REFERENCES CLIENTE(rut));
+
+CREATE TABLE CATEGORIA (
+  id     int(10) NOT NULL AUTO_INCREMENT, 
+  nombre varchar(255) NOT NULL UNIQUE, 
+  descripcion varchar(255) NOT NULL UNIQUE, 
+  PRIMARY KEY (id));
+
+CREATE TABLE PRODUCTO (
+  id           int(10) NOT NULL, 
+  nombre       varchar(255) NOT NULL, 
+  precioVenta  int(10) NOT NULL, 
+  stock        int(10) NOT NULL,
+  idCategoria  int(10) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (idCategoria) REFERENCES CATEGORIA(id));
+  
+CREATE TABLE PROVEEDOR (
+  rut       varchar(255) NOT NULL UNIQUE, 
+  nombre    varchar(255) NOT NULL, 
+  direccion varchar(255) NOT NULL, 
+  PRIMARY KEY (rut));
+  
+  CREATE TABLE ORDENPRODUCTO (
+  cantidad       int(10) NOT NULL,
+  idProducto	 int(10) NOT NULL,
+  idOrden		 int(10) NOT NULL,
+  FOREIGN KEY (idProducto) REFERENCES PRODUCTO(id),
+  FOREIGN KEY (idOrden) REFERENCES ORDEN(idOrden));
+  
+  CREATE TABLE SUMINISTRA (
+  rutProveedor   varchar(255) NOT NULL,
+  idProducto 	 int(10) NOT NULL,
+  PRIMARY KEY(rutProveedor, idProducto),
+  FOREIGN KEY (rutProveedor) REFERENCES PROVEEDOR(rut),
+  FOREIGN KEY (idProducto) REFERENCES PRODUCTO(id));
+  
