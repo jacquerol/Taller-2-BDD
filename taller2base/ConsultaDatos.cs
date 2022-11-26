@@ -9,27 +9,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
-using DatabaseUtil;
+using static DatabaseUtil.Util;
 
 namespace taller2base
 {
     public partial class ConsultaDatos : Form
     {
 
-        private DatabaseUtils util;
         public string receivedData;
         public ConsultaDatos()
         {
             InitializeComponent();
-            this.util = new DatabaseUtils();
+        }
+
+        public void RellenarVendedor(object sender, EventArgs e)
+        {
+            DataTable vendedores = GetListado("vendedor");
+            string[] nombreVendedor = new string[vendedores.Rows.Count];
+            for(int i = 0; i < vendedores.Rows.Count; i++)
+            {
+                nombreVendedor[i] = vendedores.Rows[0][i].ToString();
+            }
+            RellenarComboBox(vendorComboBox, nombreVendedor);
         }
 
         public void DatosPorRut(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != ((char)Keys.Enter)) return;
-            util.DesplegarDatos(util.GetTabla("SELECT * FROM CLIENTE c WHERE c.rut = '" + rutTextBox.Text + "'"));
+            DesplegarDatos(GetTabla("SELECT * FROM CLIENTE c WHERE c.rut = '" + rutTextBox.Text + "'"));
         }
-
+        public void RellenarListadoUniversal(object sender, EventArgs e)
+        {
+            RellenarComboBox(ListadoUniversalComboBox, "Proveedor, Cliente, Producto, Categoria, Vendedor".Split(", "));
+        }
+        
 
         public void DatosVendedor(object sender, EventArgs e)
         {
@@ -39,10 +52,6 @@ namespace taller2base
         {
 
         } 
-        public void OrdenesCliente(object sender, EventArgs e)
-        {
-
-        }
         public void ProductosCompradosAnual(object sender, EventArgs e)
         {
 
@@ -51,10 +60,7 @@ namespace taller2base
         {
 
         }
-        public void ListadoUniversal(object sender, EventArgs e)
-        {
-
-        }
+        
         public void ProductosDeProveedor(object sender, EventArgs e)
         {
 

@@ -14,7 +14,7 @@
     <Compile Update="ConsultaDatos.cs">
       <CustomToolNamespace>taller2base</CustomToolNamespace>
     </Compile>
-    <Compile Update="DatabaseUtils.cs">
+    <Compile Update="Util.cs">
       <CustomToolNamespace>DatabaseUtil</CustomToolNamespace>
     </Compile>
   </ItemGroup>

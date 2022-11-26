@@ -12,13 +12,22 @@ using WindowsFormsApp1;
 
 namespace DatabaseUtil
 {
-    class DatabaseUtils
-    {   
-        
+    public static class Util
+    {
+        /**
+         * Rellena una combo box con los elementos de un string separados por comas
+         **/
+        public static void RellenarComboBox(ComboBox box, string[] fields)
+        {
+            for (int i = 0; i < fields.Length; i++)
+            {
+                box.Items.Add(fields[i]);
+            }
+        }
         /**
          * Recibe una DataTable de una sola entidad y despliega sus datos
          **/
-        public void DesplegarDatos(DataTable entidadUnica)
+        public static void DesplegarDatos(DataTable entidadUnica)
         {
             string mensaje = "";
             for (int i = 0; i < entidadUnica.Columns.Count; i++) {mensaje += entidadUnica.Columns[i].ColumnName.ToUpper() + ": " + entidadUnica.Rows[0][i] + "\n";}
@@ -27,7 +36,7 @@ namespace DatabaseUtil
         /**
          * Inserta o actualiza un valor
          **/
-        public void Modificar(string query)
+        public static void Modificar(string query)
         {
             try
             {
@@ -42,7 +51,7 @@ namespace DatabaseUtil
         /**
          * Selecciona un solo dato de una columna
          **/
-        public string GetDato(string query)
+        public static string GetDato(string query)
         {
             try
             {
@@ -61,7 +70,7 @@ namespace DatabaseUtil
         /**
          * Selecciona multiples columnas
          **/
-        public DataTable GetTabla(string query)
+        public static DataTable GetTabla(string query)
         {
             try
             {
@@ -78,7 +87,7 @@ namespace DatabaseUtil
         /**
          * Retorna el listado completo del elemento dado
          **/
-        public DataTable GetListado(string tipoDato) { return GetTabla("SELECT * FROM " + tipoDato); }
+        public static DataTable GetListado(string tipoDato) { return GetTabla("SELECT * FROM " + tipoDato); }
 
         /* Codigo obsoleto
         public static int checkFields(TextBox[] fields)

@@ -63,7 +63,7 @@ namespace taller2base
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.generalListComboBox = new System.Windows.Forms.ComboBox();
+            this.ListadoUniversalComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,7 +129,7 @@ namespace taller2base
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.generalListComboBox);
+            this.groupBox1.Controls.Add(this.ListadoUniversalComboBox);
             this.groupBox1.Controls.Add(this.VendorButton);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(132, 59);
@@ -297,9 +297,9 @@ namespace taller2base
             this.label9.Location = new System.Drawing.Point(326, 151);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(143, 18);
+            this.label9.Size = new System.Drawing.Size(150, 18);
             this.label9.TabIndex = 39;
-            this.label9.Text = "Productos de proveedor";
+            this.label9.Text = "Proveedores de producto";
             // 
             // providerProductsButton
             // 
@@ -427,13 +427,14 @@ namespace taller2base
             this.label2.TabIndex = 24;
             this.label2.Text = "Listado";
             // 
-            // generalListComboBox
+            // ListadoUniversalComboBox
             // 
-            this.generalListComboBox.FormattingEnabled = true;
-            this.generalListComboBox.Location = new System.Drawing.Point(84, 344);
-            this.generalListComboBox.Name = "generalListComboBox";
-            this.generalListComboBox.Size = new System.Drawing.Size(103, 23);
-            this.generalListComboBox.TabIndex = 13;
+            this.ListadoUniversalComboBox.FormattingEnabled = true;
+            this.ListadoUniversalComboBox.Location = new System.Drawing.Point(84, 344);
+            this.ListadoUniversalComboBox.Name = "ListadoUniversalComboBox";
+            this.ListadoUniversalComboBox.Size = new System.Drawing.Size(103, 23);
+            this.ListadoUniversalComboBox.TabIndex = 13;
+            this.ListadoUniversalComboBox.DropDown += new System.EventHandler(this.RellenarListadoUniversal);
             // 
             // ConsultaDatos
             // 
@@ -456,7 +457,7 @@ namespace taller2base
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button VendorButton;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox generalListComboBox;
+        private System.Windows.Forms.ComboBox ListadoUniversalComboBox;
         private System.Windows.Forms.ComboBox productProvidersComboBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox productsByCategoryComboBox;
