@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 
-namespace taller2base
+
+namespace DatabaseUtil
 {
     class DatabaseUtils
     {   
@@ -17,14 +18,15 @@ namespace taller2base
         /**
          * Recibe dos listas paralelas e imprime nombre y dato
          **/
-        public void Display(string[] tipoDato, string[] dato)
+        public void DesplegarDatos(DataTable entidadUnica)
         {
-            if (tipoDato.Length != dato.Length) return;
             string mensaje = "";
-            for(int i = 0; i < tipoDato.Length; i++)
+            for (int i = 0; i < entidadUnica.Columns.Count; i++)
             {
-                mensaje += tipoDato[i] + ": " + dato[i] + "\n";
+                mensaje += entidadUnica.Columns[i].ColumnName + ": " + entidadUnica.Rows[0][i] + "\n";
             }
+            MessageBox.Show(mensaje);
+
         }
         /**
          * Inserta o actualiza un valor
@@ -49,8 +51,10 @@ namespace taller2base
         {
             try
             {
-                ConexMySQL conex = new ConexMySQL(); conex.open();
-                string resultado = conex.selectQueryScalar("query"); conex.close();
+                ConexMySQL conex = new ConexMySQL(); 
+                conex.open();
+                string resultado = conex.selectQueryScalar(query); 
+                conex.close();
                 return resultado;
             }
             catch (Exception ex)
@@ -66,9 +70,8 @@ namespace taller2base
         {
             try
             {
-                DataTable tabla = new DataTable();
-                ConexMySQL conex = new ConexMySQL(); conex.open();
-                DataTable resultado = conex.selectQuery("query"); conex.close();
+                ConexMySQL conex = new ConexMySQL(); conex.open(); 
+                DataTable resultado = conex.selectQuery(query); conex.close();
                 return resultado;
             }
             catch (Exception ex)

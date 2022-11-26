@@ -86,7 +86,6 @@ namespace WindowsFormsApp1{
 
                     DataTable dt = new DataTable();
                     dt.Load(reader);
-
                     return dt;
 
                 }
@@ -124,7 +123,7 @@ namespace WindowsFormsApp1{
 
                     resultado = cmd.ExecuteNonQuery();
 
-                    //MessageBox.Show(resultado.ToString());
+                   
 
                 }
 
