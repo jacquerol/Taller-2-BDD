@@ -14,11 +14,21 @@ namespace DatabaseUtil
 {
     public static class Util
     {
+        public static string[] FilaALista(DataTable tabla, int posicion)
+        {
+            string[] resultado = new string[tabla.Rows.Count];
+            for (int i = 0; i < tabla.Rows.Count; i++)
+            {
+                resultado[i] = tabla.Rows[i][0].ToString();
+            }
+            return resultado;
+        }
         /**
          * Rellena una combo box con los elementos de un string separados por comas
          **/
         public static void RellenarComboBox(ComboBox box, string[] fields)
         {
+            box.Items.Clear();
             for (int i = 0; i < fields.Length; i++)
             {
                 box.Items.Add(fields[i]);

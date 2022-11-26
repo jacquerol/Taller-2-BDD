@@ -21,20 +21,26 @@ namespace taller2base
         {
             InitializeComponent();
         }
-
+        public void RellenarCliente(object sender, EventArgs e)
+        {
+            RellenarComboBox((ComboBox)sender,
+                FilaALista(GetTabla("SELECT DISTINCT RUT FROM CLIENTE ORDER BY RUT"), 0));
+        }
         public void RellenarVendedor(object sender, EventArgs e)
         {
-            DataTable vendedores = GetTabla("SELECT NOMBRE FROM VENDEDOR");
-            string[] nombreVendedor = new string[vendedores.Rows.Count];
-            MessageBox.Show(nombreVendedor.Length.ToString());
-            for(int i = 0; i < vendedores.Rows.Count; i++)
-            {
-                nombreVendedor[i] = vendedores.Rows[i].ToString();
-            }
-            
-            RellenarComboBox((ComboBox)sender, nombreVendedor);
+            RellenarComboBox((ComboBox)sender,
+                FilaALista(GetTabla("SELECT DISTINCT NUMEMPLEADO FROM VENDEDOR ORDER BY NUMEMPLEADO"), 0));
         }
-
+        public void RellenarCompra(object sender, EventArgs e)
+        {
+            RellenarComboBox((ComboBox)sender,
+                FilaALista(GetTabla("SELECT DISTINCT IDORDEN FROM ORDEN ORDER BY IDORDEN"), 0));
+        }
+        public void RellenarProveedor(object sender, EventArgs e)
+        {
+            RellenarComboBox((ComboBox)sender,
+                FilaALista(GetTabla("SELECT DISTINCT RUT FROM PROVEEDOR ORDER BY RUT"), 0));
+        }
         public void DatosPorRut(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != ((char)Keys.Enter)) return;
@@ -45,11 +51,6 @@ namespace taller2base
             RellenarComboBox(ListadoUniversalComboBox, "Proveedor, Cliente, Producto, Categoria, Vendedor".Split(", "));
         }
         
-
-        public void DatosVendedor(object sender, EventArgs e)
-        {
-
-        }
         public void DatosCompra(object sender, EventArgs e)
         {
 
@@ -106,9 +107,8 @@ namespace taller2base
 
 
 
-
-
         /// <summary>
+        /// cringe
         /// función que trabaja con los datos del cliente para poder consultar los datos correspondientes
         /// </summary>
         /// <param name="sender"></param>

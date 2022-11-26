@@ -74,6 +74,7 @@ namespace taller2base
             this.clientOrdersButton.Name = "clientOrdersButton";
             this.clientOrdersButton.Size = new System.Drawing.Size(103, 23);
             this.clientOrdersButton.TabIndex = 41;
+            this.clientOrdersButton.DropDown += new System.EventHandler(this.RellenarCliente);
             // 
             // label1
             // 
@@ -222,6 +223,7 @@ namespace taller2base
             this.clientPurchaseYearComboBox.Name = "clientPurchaseYearComboBox";
             this.clientPurchaseYearComboBox.Size = new System.Drawing.Size(174, 23);
             this.clientPurchaseYearComboBox.TabIndex = 48;
+            this.clientPurchaseYearComboBox.DropDown += new System.EventHandler(this.RellenarCliente);
             // 
             // Top5Button
             // 
@@ -259,6 +261,7 @@ namespace taller2base
             this.providerProductQuantity.Name = "providerProductQuantity";
             this.providerProductQuantity.Size = new System.Drawing.Size(174, 23);
             this.providerProductQuantity.TabIndex = 44;
+            this.providerProductQuantity.DropDown += new System.EventHandler(this.RellenarProveedor);
             // 
             // label11
             // 
@@ -308,6 +311,7 @@ namespace taller2base
             this.providerProductsButton.Name = "providerProductsButton";
             this.providerProductsButton.Size = new System.Drawing.Size(114, 23);
             this.providerProductsButton.TabIndex = 38;
+            this.providerProductsButton.DropDown += new System.EventHandler(this.RellenarProveedor);
             // 
             // label8
             // 
