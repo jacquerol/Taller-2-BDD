@@ -23,7 +23,7 @@ namespace taller2base
             DatabaseUtils util = new DatabaseUtils();
         }
 
-        public void datosPorRut(object sender, KeyPressEventArgs e)
+        public void DatosPorRut(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != ((char)Keys.Enter)) return;
             string mensaje = "";
@@ -35,6 +35,74 @@ namespace taller2base
             }
             MessageBox.Show(mensaje);
         }
+        public void DatosVendedor(object sender, EventArgs e)
+        {
+
+        }
+        public void DatosCompra(object sender, EventArgs e)
+        {
+
+        } 
+        public void OrdenesCliente(object sender, EventArgs e)
+        {
+
+        }
+        public void ProductosCompradosAnual(object sender, EventArgs e)
+        {
+
+        }
+        public void CantProductosProveedor(object sender, EventArgs e)
+        {
+
+        }
+        public void ListadoUniversal(object sender, EventArgs e)
+        {
+
+        }
+        public void ProductosDeProveedor(object sender, EventArgs e)
+        {
+
+        }
+        public void ProveedoresDeProducto(object sender, EventArgs e)
+        {
+
+        }
+        public void ProductosCompradosPorCategoria(object sender, EventArgs e)
+        {
+
+        }
+        public void ProductosCompradosPorDia(object sender, EventArgs e)
+        {
+
+        }
+        public void ProductosCategoria(object sender, EventArgs e)
+        {
+
+        }
+        public void CategoriaProducto(object sender, EventArgs e)
+        {
+
+        }
+        public void ProveedoresProducto(object sender, EventArgs e)
+        {
+
+        }
+        public void VendedoresAntiguedad(object sender, EventArgs e)
+        {
+
+        }
+        public void Top5Semana(object sender, EventArgs e)
+        {
+
+        }
+        public void ProductosSinDemanda(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
 
         /// <summary>
         /// función que trabaja con los datos del cliente para poder consultar los datos correspondientes
