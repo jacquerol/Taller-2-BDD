@@ -18,6 +18,7 @@ namespace taller2base
         
         public string receivedData;
         public string[] entidades;
+        //por hacer: eliminar la funcion mostrar tabla porque causa problemas si el combobox esta vacio
         public ConsultaDatos()
         {
             InitializeComponent();
