@@ -36,7 +36,6 @@ namespace taller2base
             this.insertData = insertData;
             this.entidad = entidad;
         }
-
         private void DataTableDisplay_Load(object sender, EventArgs e)
         {
             dataGridView.Dock = DockStyle.Bottom;

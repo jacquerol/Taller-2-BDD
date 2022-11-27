@@ -17,13 +17,13 @@ namespace DatabaseUtil
     {
         public static void MostrarTabla(ComboBox sender, string query, string titulo)
         {
-            if (!ComponenteLleno(sender)) return;
-            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            DataTableDisplay display = new DataTableDisplay(GetTabla(query),
+            if (!componenteLleno(sender)) return;
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            DataTableDisplay display = new DataTableDisplay(getTabla(query),
                 titulo + box.SelectedItem.ToString());
             display.Show();
         }
-        public static Boolean ComponenteLleno(ComboBox sender){ return sender.SelectedItem != null; }
+        public static Boolean componenteLleno(ComboBox sender){ return sender.SelectedItem != null; }
         public static Boolean ComponenteLleno(TextBox sender) { return sender.Text != ""; }
 
         public static string ContenidoComponente(ComboBox sender) { return sender.SelectedItem.ToString(); }
@@ -31,8 +31,8 @@ namespace DatabaseUtil
         public static void DesplegarListado(ComboBox box, string nombreTabla)
         {
             box.Items.Clear();
-            string pk = GetTabla("SELECT * FROM " + nombreTabla).Columns[0].ColumnName; //Se asume que la primera columna es la PK ya que solo se usa para entidades especificas
-            DataTable tabla = GetTabla("SELECT * FROM " + nombreTabla + " ORDER BY " + pk);
+            string pk = getTabla("SELECT * FROM " + nombreTabla).Columns[0].ColumnName; //Se asume que la primera columna es la PK ya que solo se usa para entidades especificas
+            DataTable tabla = getTabla("SELECT * FROM " + nombreTabla + " ORDER BY " + pk);
             DataTableDisplay display = new DataTableDisplay(tabla, tabla.TableName);
             display.Show();
         }
@@ -42,8 +42,8 @@ namespace DatabaseUtil
         public static void RellenarConRegistros(ComboBox box, string nombreTabla)
         {
             box.Items.Clear();
-            string pk = GetTabla("SELECT * FROM " + nombreTabla).Columns[0].ColumnName; //Se asume que la primera columna es la PK ya que solo se usa para entidades especificas
-            DataTable tabla = GetTabla("SELECT DISTINCT " + pk +" FROM " +nombreTabla +" ORDER BY " +pk);
+            string pk = getTabla("SELECT * FROM " + nombreTabla).Columns[0].ColumnName; //Se asume que la primera columna es la PK ya que solo se usa para entidades especificas
+            DataTable tabla = getTabla("SELECT DISTINCT " + pk +" FROM " +nombreTabla +" ORDER BY " +pk);
             for (int i = 0; i < tabla.Rows.Count; i++)
             {
                 box.Items.Add(tabla.Rows[i][0].ToString());
@@ -106,7 +106,7 @@ namespace DatabaseUtil
         /**
          * Selecciona multiples columnas
          **/
-        public static DataTable GetTabla(string query)
+        public static DataTable getTabla(string query)
         {
             try
             {

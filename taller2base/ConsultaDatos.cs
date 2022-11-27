@@ -24,101 +24,162 @@ namespace taller2base
             InitializeComponent();
             entidades = new string[] { "Cliente", "Categoria", "Vendedor", "Orden", "Proveedor", "Producto" };
         }
-        public void DatosPorRut(object sender, KeyPressEventArgs e)
+        /**
+         * Emitir un listado. Puede ser uno de los siguientes listados: (1)
+         * Listado de proveedores, Listado de clientes, Listado de productos, 
+         * Listado de categorías, Listado de vendedores 
+         **/
+        public void DesplegarListadoUniversal(object sender, EventArgs e)
         {
-            TextBox box = (TextBox)sender; if (!ComponenteLleno(box) || e.KeyChar != ((char)Keys.Enter)) return;
-            DataTableDisplay display = new DataTableDisplay(GetTabla("SELECT * FROM CLIENTE WHERE RUT = '" + box.Text + "'"), "Datos del vendedor " + box.Text);
+            object input = ListadoUniversalComboBox.SelectedItem;
+            if (input == null) return;
+            string text = input.ToString();
+            for (int i = 0; i < this.entidades.Length; i++)
+            {
+                if (text == this.entidades[i]) DesplegarListado((ComboBox)sender, this.entidades[i]);
+            }
+        }
+        /**
+         * Datos de un vendedor por rut (2) 
+         * #Falta antiguedad
+         **/
+        public void datosVendedor(object sender, EventArgs e)
+        {
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM VENDEDOR WHERE NUMEMPLEADO = '" + box.SelectedItem.ToString() + "'"), "Datos del vendedor " + box.SelectedItem.ToString());
             display.Show();
         }
-        
-        public void DatosCompra(object sender, EventArgs e)
-        {
-            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            DataTableDisplay display = new DataTableDisplay(GetTabla("SELECT * FROM ORDEN INNER JOIN ORDENPRODUCTO ON ORDENPRODUCTO.IDORDEN = ORDEN.IDORDEN WHERE ORDEN.IDORDEN = '" + box.SelectedItem.ToString() + "'"), "Datos de la compra "+box.SelectedItem.ToString());
-            display.Show();
-        } 
-        public void ProductosCompradosAnual(object sender, EventArgs e)
-        {
+        /**
+         * Los vendedores de mayor antigüedad y los vendedores de menor antigüedad en la empresa (indicar los años de antigüedad) (3) 
+         * #Incompleta
+         **/
+        public void VendedoresAntiguedad(object sender, EventArgs e){
 
         }
-        public void CantProductosProveedor(object sender, EventArgs e)
+        /**
+         * Datos de una orden de compra, incluyendo el cliente, el vendedor y los productos de la orden (4)
+         **/
+        public void datosCompra(object sender, EventArgs e)
         {
-            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            MessageBox.Show("Cantidad: "+GetDato("select DISTINCT count(suministra.idProducto) " +
-                "from((suministra inner join producto on suministra.idProducto = producto.id) " +
-                "inner join proveedor on suministra.rutProveedor = proveedor.rut and " +
-                "proveedor.rut = '" + box.SelectedItem.ToString() + "')"), "Resultado del proveedor "+box.SelectedItem.ToString()); 
-        }
-        public void DatosVendedor(object sender, EventArgs e)
-        {
-            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            DataTableDisplay display = new DataTableDisplay(GetTabla("SELECT * FROM VENDEDOR WHERE NUMEMPLEADO = '" + box.SelectedItem.ToString() + "'"), "Datos del vendedor " + box.SelectedItem.ToString());
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM ORDEN INNER JOIN ORDENPRODUCTO ON ORDENPRODUCTO.IDORDEN = ORDEN.IDORDEN WHERE ORDEN.IDORDEN = '" + box.SelectedItem.ToString() + "'"), "Datos de la compra " + box.SelectedItem.ToString());
             display.Show();
         }
-        public void ProductosDeProveedor(object sender, EventArgs e)
+        /**
+         * La categoría de un producto (5)
+         **/
+        public void CategoriaProducto(object sender, EventArgs e)
         {
-            ComboBox box = (ComboBox)sender; string query = 
-                "select producto.precioVenta from proveedor inner join suministra on proveedor.rut = suministra.rutProveedor and proveedor.rut = "+box.SelectedItem.ToString()+" inner join producto on suministra.idProducto = producto.id";
-            MostrarTabla(box, query, "Productos del proveedor");
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            DesplegarDatos(getTabla("select c.nombre from categoria c inner join producto p where p.idcategoria = c.id and p.id = '" + box.SelectedItem.ToString() + "'"));
         }
-        public void ProveedoresDeProducto(object sender, EventArgs e)
+        /**
+         * Cantidad de productos asociados a una categoría (6)
+         **/
+        public void ProductosCategoria(object sender, EventArgs e)
         {
-            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            MessageBox.Show(GetDato("select distinct count(p.nombre) from categoria c inner join producto p where p.idcategoria = c.id and c.id = '" + box.SelectedItem.ToString() + "'"), "Cantidad");
+        }
+        /**
+         * Los proveedores que suministran un producto (7)
+         * #No funciona
+         **/
+        public void proveedoresDeProducto(object sender, EventArgs e)
+        {
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
             DataTableDisplay display = new DataTableDisplay(
-                GetTabla("select distinct p.nombre, p.rut from producto inner join suministra on suministra.idproducto = producto.id and producto.id = '" + box.SelectedItem.ToString() +
-                "' inner join proveedor p on p.rut = suministra.rutproveedor"), 
+                getTabla("select distinct p.nombre, p.rut from producto inner join suministra on suministra.idproducto = producto.id and producto.id = '" + box.SelectedItem.ToString() +
+                "' inner join proveedor p on p.rut = suministra.rutproveedor"),
                 "Proveedores del producto " + box.SelectedItem.ToString());
             display.Show();
         }
-        public void ProductosCompradosPorCategoria(object sender, EventArgs e)
+        /**
+         * Los productos que suministra un proveedor, indicando el precio y la cantidad (8)
+         **/
+        public void productosDeProveedor(object sender, EventArgs e)
         {
-            if(ComponenteLleno(productCategoryButton_category) & ComponenteLleno(productCategoryButton_client))
-            {
-                ComboBox categoriaComboBox = (ComboBox)sender; ComboBox clienteComboBox = (ComboBox)sender;
-                string idcategoria = categoriaComboBox.SelectedItem.ToString(); string rutCliente = clienteComboBox.SelectedItem.ToString();
-                string query = "select distinct producto.nombre from((((cliente inner join orden on cliente.rut = orden.rutCliente) inner join ordenProducto on orden.idOrden = ordenProducto.idOrden) inner join producto on ordenProducto.idProducto = producto.id) inner join categoria on producto.idCategoria = categoria.id)";
-                MostrarTabla(clienteComboBox, query, "Resultado de la categoria ");
-            }
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            string query =
+                "select producto.precioVenta from proveedor inner join suministra on proveedor.rut = suministra.rutProveedor and proveedor.rut = " + box.SelectedItem.ToString() + " inner join producto on suministra.idProducto = producto.id";
+            DataTableDisplay display = new DataTableDisplay(getTabla(query),
+                "Productos del proveedor " + box.SelectedItem.ToString());
+            display.Show();
         }
-        public void ProductosCompradosPorDia(object sender, EventArgs e)
+        /**
+         * Cantidad de órdenes de compra asociadas a un cliente, en los últimos 30 días (9) #Incompleta
+         **/
+        public void ordenesCliente(object sender, EventArgs e)
         {
-
+            TextBox box = (TextBox)sender; if (!ComponenteLleno(box)) return;
+            DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM CLIENTE WHERE RUT = '" + box.Text + "'"), "Datos del vendedor " + box.Text);
+            display.Show();
         }
-        public void ProductosCategoria(object sender, EventArgs e)
+        /**
+         * Cantidad total de productos que suministra un vendedor (10)
+         **/
+        public void cantProductosProveedor(object sender, EventArgs e)
         {
-            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            MessageBox.Show(GetDato("select distinct count(p.nombre) from categoria c inner join producto p where p.idcategoria = c.id and c.id = '" + box.SelectedItem.ToString() + "'"), "Cantidad");
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            MessageBox.Show("Cantidad: " + GetDato("select DISTINCT count(suministra.idProducto) " +
+                "from((suministra inner join producto on suministra.idProducto = producto.id) " +
+                "inner join proveedor on suministra.rutProveedor = proveedor.rut and " +
+                "proveedor.rut = '" + box.SelectedItem.ToString() + "')"), "Resultado del proveedor " + box.SelectedItem.ToString());
         }
-        public void CategoriaProducto(object sender, EventArgs e)
+        /**
+         * Dado un rut de cliente desplegar: rut, nombre, saldo en su cuenta, monto total por órdenes de compras emitidas en los últimos 3 meses (11) 
+         * #Falta monto
+         **/
+        public void datosPorRut(object sender, KeyPressEventArgs e)
         {
-            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            DesplegarDatos(GetTabla("select c.nombre from categoria c inner join producto p where p.idcategoria = c.id and p.id = '" + box.SelectedItem.ToString() +  "'"));
+            TextBox box = (TextBox)sender; if (!ComponenteLleno(box) || e.KeyChar != ((char)Keys.Enter)) return;
+            DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM CLIENTE WHERE RUT = '" + box.Text + "'"), "Datos del vendedor " + box.Text);
+            display.Show();
         }
-        public void VendedoresAntiguedad(object sender, EventArgs e)
-        {
-
-        }
+        /**
+         * Los 5 productos más vendidos de la semana anterior, indicar la cantidad de cada producto (12)
+         **/
         public void Top5Semana(object sender, EventArgs e)
         {
 
         }
+        /**
+         * Los productos que ha comprado un cierto cliente durante el año, indicar la cantidad de cada producto (13)
+         **/
+        public void ProductosCompradosAnual(object sender, EventArgs e)
+        {
+
+        }
+        /**
+         * Los productos de una cierta categoría que ha comprado un cliente (14)
+         **/
+        public void ProductosCompradosPorCategoria(object sender, EventArgs e)
+        {
+            if (componenteLleno(productCategoryButton_category) & componenteLleno(productCategoryButton_client))
+            {
+                ComboBox categoriaComboBox = (ComboBox)sender; ComboBox clienteComboBox = (ComboBox)sender;
+                string idcategoria = categoriaComboBox.SelectedItem.ToString(); string rutCliente = clienteComboBox.SelectedItem.ToString();
+                string query = "select distinct producto.nombre from((((cliente inner join orden on cliente.rut = orden.rutCliente) inner join ordenProducto on orden.idOrden = ordenProducto.idOrden) inner join producto on ordenProducto.idProducto = producto.id) inner join categoria on producto.idCategoria = categoria.id)";
+                DataTableDisplay display = new DataTableDisplay(getTabla(query), "Resultado"); display.Show();
+            }
+        }
+        /**
+        * Los productos que no han participado en órdenes de compra en el último mes  (15)
+        **/
         public void ProductosSinDemanda(object sender, EventArgs e)
         {
 
         }
-        private void label3_Click(object sender, EventArgs e)
+        /**
+         * Los productos que fueron comprados por los clientes en un cierto día (16)
+         **/
+        public void ProductosCompradosPorDia(object sender, EventArgs e)
         {
 
         }
-        public void DesplegarListadoUniversal(object sender, EventArgs e) {
-            object input = ListadoUniversalComboBox.SelectedItem;
-            if (input== null) return;
-            string text = input.ToString();
-            for(int i = 0; i < this.entidades.Length; i++)
-            {
-                if(text == this.entidades[i]) DesplegarListado((ComboBox)sender, this.entidades[i]);
-            }
-        }
+
+
+        
         public void RellenarCliente(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "cliente"); }
         public void RellenarCategoria(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "categoria"); }
         public void RellenarVendedor(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "vendedor"); }

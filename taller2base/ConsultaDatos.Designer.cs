@@ -244,7 +244,7 @@
             this.rutTextBox.Name = "rutTextBox";
             this.rutTextBox.Size = new System.Drawing.Size(118, 23);
             this.rutTextBox.TabIndex = 46;
-            this.rutTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DatosPorRut);
+            this.rutTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.datosPorRut);
             // 
             // label12
             // 
@@ -267,7 +267,7 @@
             this.providerProductQuantity.TabIndex = 44;
             this.providerProductQuantity.Text = "RUT";
             this.providerProductQuantity.DropDown += new System.EventHandler(this.RellenarProveedor);
-            this.providerProductQuantity.DropDownClosed += new System.EventHandler(this.CantProductosProveedor);
+            this.providerProductQuantity.DropDownClosed += new System.EventHandler(this.cantProductosProveedor);
             // 
             // label11
             // 
@@ -301,7 +301,7 @@
             this.providerProductsButton.TabIndex = 38;
             this.providerProductsButton.Text = "RUT";
             this.providerProductsButton.DropDown += new System.EventHandler(this.RellenarProveedor);
-            this.providerProductsButton.DropDownClosed += new System.EventHandler(this.ProductosDeProveedor);
+            this.providerProductsButton.DropDownClosed += new System.EventHandler(this.productosDeProveedor);
             // 
             // label8
             // 
@@ -324,7 +324,7 @@
             this.productProvidersComboBox.TabIndex = 36;
             this.productProvidersComboBox.Text = "ID";
             this.productProvidersComboBox.DropDown += new System.EventHandler(this.RellenarProducto);
-            this.productProvidersComboBox.DropDownClosed += new System.EventHandler(this.ProveedoresDeProducto);
+            this.productProvidersComboBox.DropDownClosed += new System.EventHandler(this.proveedoresDeProducto);
             // 
             // label7
             // 
@@ -393,7 +393,7 @@
             this.salesDataButton.TabIndex = 30;
             this.salesDataButton.Text = "ID";
             this.salesDataButton.DropDown += new System.EventHandler(this.RellenarCompra);
-            this.salesDataButton.DropDownClosed += new System.EventHandler(this.DatosCompra);
+            this.salesDataButton.DropDownClosed += new System.EventHandler(this.datosCompra);
             // 
             // vendorComboBox
             // 
@@ -405,7 +405,7 @@
             this.vendorComboBox.TabIndex = 29;
             this.vendorComboBox.Text = "ID empleado";
             this.vendorComboBox.DropDown += new System.EventHandler(this.RellenarVendedor);
-            this.vendorComboBox.DropDownClosed += new System.EventHandler(this.DatosVendedor);
+            this.vendorComboBox.DropDownClosed += new System.EventHandler(this.datosVendedor);
             // 
             // label4
             // 
@@ -428,7 +428,6 @@
             this.label3.Size = new System.Drawing.Size(97, 18);
             this.label3.TabIndex = 26;
             this.label3.Text = "Datos vendedor";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
             // 
