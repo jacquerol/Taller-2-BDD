@@ -21,7 +21,11 @@ namespace taller2base
         {
 
         }
-
+        private void insertarCliente(object sender, EventArgs e)
+        { 
+            DataTableDisplay insertador = new DataTableDisplay(new string[]{"rut", "nombre", "saldo", "direccion", "telefono"}, "Cliente");
+            insertador.Show();
+        }
         /*
         private void addCategoriaButton_Click(object sender, EventArgs e)
         {

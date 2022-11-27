@@ -33,7 +33,7 @@ namespace taller2base
         public void DatosCompra(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            DataTableDisplay display = new DataTableDisplay(GetTabla("SELECT * FROM ORDEN WHERE IDORDEN = '" + box.SelectedItem.ToString() + "'"), "Datos de la compra "+box.SelectedItem.ToString());
+            DataTableDisplay display = new DataTableDisplay(GetTabla("SELECT * FROM ORDEN INNER JOIN ORDENPRODUCTO ON ORDENPRODUCTO.IDORDEN = ORDEN.IDORDEN WHERE ORDEN.IDORDEN = '" + box.SelectedItem.ToString() + "'"), "Datos de la compra "+box.SelectedItem.ToString());
             display.Show();
         } 
         public void ProductosCompradosAnual(object sender, EventArgs e)
@@ -43,10 +43,10 @@ namespace taller2base
         public void CantProductosProveedor(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            MessageBox.Show(GetDato("select DISTINCT count(suministra.idProducto) " +
+            MessageBox.Show("Cantidad: "+GetDato("select DISTINCT count(suministra.idProducto) " +
                 "from((suministra inner join producto on suministra.idProducto = producto.id) " +
                 "inner join proveedor on suministra.rutProveedor = proveedor.rut and " +
-                "proveedor.rut = '" + box.SelectedItem.ToString() + "')"), "Cantidad de productos de "+box.SelectedItem.ToString()); 
+                "proveedor.rut = '" + box.SelectedItem.ToString() + "')"), "Resultado del proveedor "+box.SelectedItem.ToString()); 
         }
         public void DatosVendedor(object sender, EventArgs e)
         {
@@ -56,15 +56,9 @@ namespace taller2base
         }
         public void ProductosDeProveedor(object sender, EventArgs e)
         {
-            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
-            DataTableDisplay display = new DataTableDisplay(GetTabla(
-                "select producto.precioVenta, count(*) " +
-                "from((proveedor inner join suministra on proveedor.rut = suministra.rutProveedor and proveedor.rut = " +
-                box.SelectedItem.ToString() +
-                ") " +
-                "inner join producto on suministra.idProducto = producto.id)"),
-                "Productos del proveedor " + box.SelectedItem.ToString());
-            display.Show();
+            ComboBox box = (ComboBox)sender; string query = 
+                "select producto.precioVenta from proveedor inner join suministra on proveedor.rut = suministra.rutProveedor and proveedor.rut = "+box.SelectedItem.ToString()+" inner join producto on suministra.idProducto = producto.id";
+            MostrarTabla(box, query, "Productos del proveedor");
         }
         public void ProveedoresDeProducto(object sender, EventArgs e)
         {
@@ -77,7 +71,13 @@ namespace taller2base
         }
         public void ProductosCompradosPorCategoria(object sender, EventArgs e)
         {
-
+            if(ComponenteLleno(productCategoryButton_category) & ComponenteLleno(productCategoryButton_client))
+            {
+                ComboBox categoriaComboBox = (ComboBox)sender; ComboBox clienteComboBox = (ComboBox)sender;
+                string idcategoria = categoriaComboBox.SelectedItem.ToString(); string rutCliente = clienteComboBox.SelectedItem.ToString();
+                string query = "select distinct producto.nombre from((((cliente inner join orden on cliente.rut = orden.rutCliente) inner join ordenProducto on orden.idOrden = ordenProducto.idOrden) inner join producto on ordenProducto.idProducto = producto.id) inner join categoria on producto.idCategoria = categoria.id)";
+                MostrarTabla(clienteComboBox, query, "Resultado de la categoria ");
+            }
         }
         public void ProductosCompradosPorDia(object sender, EventArgs e)
         {
@@ -106,7 +106,7 @@ namespace taller2base
 
         }
         /// <summary>
-        /// cringe
+        /// funcion obsoleta
         /// función que trabaja con los datos del cliente para poder consultar los datos correspondientes
         /// </summary>
         /// <param name="sender"></param>

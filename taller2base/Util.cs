@@ -15,6 +15,14 @@ namespace DatabaseUtil
 {
     public static class Util
     {
+        public static void MostrarTabla(ComboBox sender, string query, string titulo)
+        {
+            if (!ComponenteLleno(sender)) return;
+            ComboBox box = (ComboBox)sender; if (!ComponenteLleno(box)) return;
+            DataTableDisplay display = new DataTableDisplay(GetTabla(query),
+                titulo + box.SelectedItem.ToString());
+            display.Show();
+        }
         public static Boolean ComponenteLleno(ComboBox sender){ return sender.SelectedItem != null; }
         public static Boolean ComponenteLleno(TextBox sender) { return sender.Text != ""; }
 

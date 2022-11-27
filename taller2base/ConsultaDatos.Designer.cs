@@ -184,6 +184,7 @@
             this.productCategoryButton_category.Size = new System.Drawing.Size(174, 23);
             this.productCategoryButton_category.TabIndex = 52;
             this.productCategoryButton_category.DropDown += new System.EventHandler(this.RellenarCategoria);
+            this.productCategoryButton_category.DropDownClosed += new System.EventHandler(this.ProductosCompradosPorCategoria);
             // 
             // productCategoryButton_client
             // 
