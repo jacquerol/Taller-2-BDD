@@ -77,6 +77,7 @@ namespace taller2base
             this.sendButton.Text = "Enviar";
             this.sendButton.UseVisualStyleBackColor = true;
             this.sendButton.Visible = false;
+            this.sendButton.Click += new System.EventHandler(this.insertar);
             // 
             // DataTableDisplay
             // 

@@ -114,7 +114,7 @@ namespace taller2base
          **/
         public void ordenesCliente(object sender, EventArgs e)
         {
-            TextBox box = (TextBox)sender; if (!ComponenteLleno(box)) return;
+            TextBox box = (TextBox)sender; if (!componenteLleno(box)) return;
             DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM CLIENTE WHERE RUT = '" + box.Text + "'"), "Datos del vendedor " + box.Text);
             display.Show();
         }
@@ -135,7 +135,7 @@ namespace taller2base
          **/
         public void datosPorRut(object sender, KeyPressEventArgs e)
         {
-            TextBox box = (TextBox)sender; if (!ComponenteLleno(box) || e.KeyChar != ((char)Keys.Enter)) return;
+            TextBox box = (TextBox)sender; if (!componenteLleno(box) || e.KeyChar != ((char)Keys.Enter)) return;
             DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM CLIENTE WHERE RUT = '" + box.Text + "'"), "Datos del vendedor " + box.Text);
             display.Show();
         }

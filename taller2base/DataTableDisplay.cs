@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static DatabaseUtil.Util;
 
 namespace taller2base
 {
@@ -23,14 +24,15 @@ namespace taller2base
         /**
          * Sobrecarga del constructor para realizar querys de envio
          **/
-        public DataTableDisplay(string[] columnas, string titulo, Boolean insertData=true, string entidad="")
+        public DataTableDisplay(string[] columnas, string entidad, Boolean insertData=true)
         {
             InitializeComponent();
-            label.Text = titulo;
+            label.Text = "Insertar "+entidad;
             bindingSource = new BindingSource();
             DataTable tabla = new DataTable();
             this.columnas = columnas;
             for (int i = 0; i < columnas.Length; i++){tabla.Columns.Add(columnas[i]);}
+            tabla.Rows.Add();
             bindingSource.DataSource = tabla;
             this.Controls.Add(dataGridView);
             this.insertData = insertData;
@@ -48,28 +50,34 @@ namespace taller2base
             {
                 dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
                 sendButton.Show();
+                dataGridView.AllowUserToAddRows = false;
             }
             else sendButton.Hide();
         }
         ~DataTableDisplay(){}
 
-        private void insertar()
+        private void insertar(object sender, EventArgs e)
         {
             DataTable tabla = convertirEnDataTable(this.dataGridView);
-            string query = "INSERT INTO "+this.entidad+"(";
+            string query = "INSERT INTO "+this.entidad+" (";
             for(int i = 0; i < tabla.Columns.Count; i++)
             {
-                query += " " + tabla.Columns[i].ColumnName.ToString();
-
+                query += tabla.Columns[i].ColumnName.ToString();
+                if (i < tabla.Columns.Count-1) query += ", ";
             }
             query += ") VALUES (";
             for (int i = 0; i < tabla.Columns.Count; i++)
             {
-                query += " " + tabla.Rows[0][i];
+                string cell = tabla.Rows[0][i].ToString();
+                if (!int.TryParse(tabla.Rows[0][i].ToString(), out int parseInt)) cell = "'" + cell + "'";
+                query += cell;
+                if (i < tabla.Columns.Count - 1) query += ", ";
             }
-            query += "";
+            query += ")";
+            MessageBox.Show(query);
+            Modificar(query);
         }
-
+        
         private DataTable convertirEnDataTable(DataGridView gridView)
         {
             DataTable dt = new DataTable();

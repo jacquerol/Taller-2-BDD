@@ -7,33 +7,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DatabaseUtil.Util;
 
 namespace taller2base
 {
     public partial class ModificarDatos : Form
     {
+        public string[] entidades;
         public ModificarDatos()
         {
             InitializeComponent();
+            this.entidades = new string[] { "Cliente", "Categoria", "Vendedor", "Orden", "Proveedor", "Producto" };
         }
 
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
         }
-        private void insertarCliente(object sender, EventArgs e)
-        { 
-            DataTableDisplay insertador = new DataTableDisplay(new string[]{"rut", "nombre", "saldo", "direccion", "telefono"}, "Cliente");
-            insertador.Show();
-        }
-        /*
-        private void addCategoriaButton_Click(object sender, EventArgs e)
+        /**
+         * Insertar un dato a la base de datos. Puede ser una de las siguientes opciones: (2)
+         * Insertar un nuevo cliente, Insertar un nuevo proveedor, Insertar un nuevo producto, 
+         * Insertar un nuevo vendedor, Insertar una nueva categoría 
+         **/
+        private void insertar(object sender, EventArgs e)
         {
-            Password password = new Password("AddCategoria");
-            password.Show();
+            ComboBox box = (ComboBox)sender; string entidad = box.SelectedItem.ToString(); string[] campos;
+            for(int i = 0; i < entidades.Length; i++)
+            {
+                if(entidad == entidades[i])
+                {
+                    campos = getCamposEntidad(entidades[i]);
+                    DataTableDisplay display = new DataTableDisplay(campos, entidad, true);
+                    display.Show();
+                }
+            }
         }
-        */
-
+        private void cargarEntidades(object sender, EventArgs e)
+        {
+            ComboBox box = (ComboBox)sender;
+            for(int i = 0; i < entidades.Length; i++)
+            {
+                box.Items.Add(entidades[i]);
+            }
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 

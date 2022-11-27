@@ -15,19 +15,18 @@ namespace DatabaseUtil
 {
     public static class Util
     {
-        public static void MostrarTabla(ComboBox sender, string query, string titulo)
+        public static string[] getCamposEntidad(string entidad)
         {
-            if (!componenteLleno(sender)) return;
-            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
-            DataTableDisplay display = new DataTableDisplay(getTabla(query),
-                titulo + box.SelectedItem.ToString());
-            display.Show();
+            DataTable tabla = getTabla("SELECT * FROM " + entidad);
+            string[] resultado = new string[tabla.Columns.Count];
+            for (int i = 0; i < tabla.Columns.Count; i++)
+            {
+                resultado[i] = tabla.Columns[i].ColumnName;
+            }
+            return resultado;
         }
         public static Boolean componenteLleno(ComboBox sender){ return sender.SelectedItem != null; }
-        public static Boolean ComponenteLleno(TextBox sender) { return sender.Text != ""; }
-
-        public static string ContenidoComponente(ComboBox sender) { return sender.SelectedItem.ToString(); }
-        public static string ContenidoComponente(TextBox sender) { return sender.Text; }
+        public static Boolean componenteLleno(TextBox sender) { return sender.Text != ""; }
         public static void DesplegarListado(ComboBox box, string nombreTabla)
         {
             box.Items.Clear();
@@ -120,8 +119,6 @@ namespace DatabaseUtil
             }
             return null;
         }
-       
-
         /* Codigo obsoleto
         public static int checkFields(TextBox[] fields)
         {
