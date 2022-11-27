@@ -71,7 +71,7 @@ namespace DatabaseUtil
         /**
          * Inserta o actualiza un valor
          **/
-        public static void Modificar(string query)
+        public static void añadirDato(string query)
         {
             try
             {

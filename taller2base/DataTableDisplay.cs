@@ -63,6 +63,11 @@ namespace taller2base
         private void insertar(object sender, EventArgs e)
         {
             DataTable tabla = convertirEnDataTable(this.dataGridView);
+            if (!datosLlenados(tabla))
+            {
+                MessageBox.Show("Complete todos los campos.", "Error");
+                return;
+            }
             string query = "INSERT INTO "+this.entidad+" (";
             for(int i = 0; i < tabla.Columns.Count; i++)
             {
@@ -78,28 +83,35 @@ namespace taller2base
                 if (i < tabla.Columns.Count - 1) query += ", ";
             }
             query += ")";
-            MessageBox.Show(query);
-            Modificar(query);
+            añadirDato(query);
+        }
+        private Boolean datosLlenados(DataTable tabla)
+        {
+            for(int i = 0; i < tabla.Columns.Count; i++)
+            {
+                if (tabla.Rows[0][i].ToString() == "") return false;
+            }
+            return true;
         }
         /**
          * Convierte un componente DataGridView en un objeto DataTable
          **/
         private DataTable convertirEnDataTable(DataGridView gridView)
         {
-            DataTable dt = new DataTable();
+            DataTable tabla = new DataTable();
             foreach (DataGridViewColumn column in gridView.Columns)
             {
-                dt.Columns.Add(column.HeaderText, column.ValueType);
+                tabla.Columns.Add(column.HeaderText, column.ValueType);
             }
             foreach (DataGridViewRow row in gridView.Rows)
             {
-                dt.Rows.Add();
+                tabla.Rows.Add();
                 foreach (DataGridViewCell cell in row.Cells)
                 {
-                    dt.Rows[dt.Rows.Count - 1][cell.ColumnIndex] = cell.Value.ToString();
+                    tabla.Rows[tabla.Rows.Count - 1][cell.ColumnIndex] = cell.Value.ToString();
                 }
             }
-            return dt;
+            return tabla;
         }
 
         private void exit(object sender, EventArgs e){this.Close();}
