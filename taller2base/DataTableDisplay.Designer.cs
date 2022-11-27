@@ -6,7 +6,7 @@ namespace taller2base
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private global::System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,52 +29,56 @@ namespace taller2base
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.dataGridView = new global::System.Windows.Forms.DataGridView();
+            this.label = new global::System.Windows.Forms.Label();
+            this.button1 = new global::System.Windows.Forms.Button();
+            ((global::System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
             // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(81, 71);
+            this.dataGridView.ColumnHeadersHeightSizeMode = global::System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.EditMode = global::System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridView.Location = new global::System.Drawing.Point(-6, 136);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(450, 223);
+            this.dataGridView.Size = new global::System.Drawing.Size(660, 226);
             this.dataGridView.TabIndex = 1;
             // 
-            // label1
+            // label
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(226, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 32);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "modularLabel";
+            this.label.AutoSize = true;
+            this.label.Font = new global::System.Drawing.Font("Segoe UI", 18F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point);
+            this.label.Location = new global::System.Drawing.Point(155, 51);
+            this.label.Name = "label";
+            this.label.Size = new global::System.Drawing.Size(193, 32);
+            this.label.TabIndex = 2;
+            this.label.Text = "changeableLabel";
+            this.label.TextAlign = global::System.Drawing.ContentAlignment.TopCenter;
+            this.label.Click += new global::System.EventHandler(this.label_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(273, 313);
+            this.button1.Location = new global::System.Drawing.Point(273, 313);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new global::System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new global::System.EventHandler(this.exit);
             // 
             // DataTableDisplay
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 352);
+            this.AutoScaleDimensions = new global::System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = global::System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new global::System.Drawing.Size(651, 352);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label);
             this.Controls.Add(this.dataGridView);
             this.Name = "DataTableDisplay";
             this.Text = "Resultado";
-            this.Load += new System.EventHandler(this.DataTableDisplay_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.Load += new global::System.EventHandler(this.DataTableDisplay_Load);
+            ((global::System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,8 +86,8 @@ namespace taller2base
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private global::System.Windows.Forms.DataGridView dataGridView;
+        private global::System.Windows.Forms.Label label;
+        private global::System.Windows.Forms.Button button1;
     }
 }

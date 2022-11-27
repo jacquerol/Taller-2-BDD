@@ -6,7 +6,7 @@ namespace taller2base
         /// <summary>
         /// Variable del diseñador necesaria.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private global::System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Limpiar los recursos que se estén usando.
@@ -29,62 +29,62 @@ namespace taller2base
         /// </summary>
         private void InitializeComponent()
         {
-            this.modifyButton = new System.Windows.Forms.Button();
-            this.statisticsButton = new System.Windows.Forms.Button();
-            this.title = new System.Windows.Forms.Label();
+            this.modifyButton = new global::System.Windows.Forms.Button();
+            this.statisticsButton = new global::System.Windows.Forms.Button();
+            this.title = new global::System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // modifyButton
             // 
-            this.modifyButton.Location = new System.Drawing.Point(393, 195);
-            this.modifyButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.modifyButton.Location = new global::System.Drawing.Point(393, 195);
+            this.modifyButton.Margin = new global::System.Windows.Forms.Padding(4, 3, 4, 3);
             this.modifyButton.Name = "modifyButton";
-            this.modifyButton.Size = new System.Drawing.Size(132, 58);
+            this.modifyButton.Size = new global::System.Drawing.Size(132, 58);
             this.modifyButton.TabIndex = 0;
             this.modifyButton.Text = "Modificar datos";
             this.modifyButton.UseVisualStyleBackColor = true;
-            this.modifyButton.Click += new System.EventHandler(this.modifyButton_Click);
+            this.modifyButton.Click += new global::System.EventHandler(this.modifyButton_Click);
             // 
             // statisticsButton
             // 
-            this.statisticsButton.Location = new System.Drawing.Point(393, 260);
-            this.statisticsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.statisticsButton.Location = new global::System.Drawing.Point(393, 260);
+            this.statisticsButton.Margin = new global::System.Windows.Forms.Padding(4, 3, 4, 3);
             this.statisticsButton.Name = "statisticsButton";
-            this.statisticsButton.Size = new System.Drawing.Size(132, 65);
+            this.statisticsButton.Size = new global::System.Drawing.Size(132, 65);
             this.statisticsButton.TabIndex = 2;
             this.statisticsButton.Text = "Consultar datos";
             this.statisticsButton.UseVisualStyleBackColor = true;
-            this.statisticsButton.Click += new System.EventHandler(this.statisticsButton_Click);
+            this.statisticsButton.Click += new global::System.EventHandler(this.statisticsButton_Click);
             // 
             // title
             // 
             this.title.AutoSize = true;
-            this.title.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.title.Font = new System.Drawing.Font("Impact", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.title.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.title.Location = new System.Drawing.Point(338, 133);
-            this.title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.title.BackColor = global::System.Drawing.SystemColors.GradientInactiveCaption;
+            this.title.Font = new global::System.Drawing.Font("Impact", 24F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point);
+            this.title.ForeColor = global::System.Drawing.SystemColors.ActiveCaptionText;
+            this.title.Location = new global::System.Drawing.Point(338, 133);
+            this.title.Margin = new global::System.Windows.Forms.Padding(4, 0, 4, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(246, 39);
+            this.title.Size = new global::System.Drawing.Size(246, 39);
             this.title.TabIndex = 5;
             this.title.Text = "Empresa ABC S. A.";
-            this.title.Click += new System.EventHandler(this.label1_Click_1);
+            this.title.Click += new global::System.EventHandler(this.label1_Click_1);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(933, 545);
+            this.AutoScaleDimensions = new global::System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = global::System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = global::System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new global::System.Drawing.Size(933, 545);
             this.Controls.Add(this.title);
             this.Controls.Add(this.statisticsButton);
             this.Controls.Add(this.modifyButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Margin = new global::System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Librería antofagasta libros";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new global::System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,9 +92,9 @@ namespace taller2base
 
         #endregion
 
-        private System.Windows.Forms.Button modifyButton;
-        private System.Windows.Forms.Button statisticsButton;
-        private System.Windows.Forms.Label title;
+        private global::System.Windows.Forms.Button modifyButton;
+        private global::System.Windows.Forms.Button statisticsButton;
+        private global::System.Windows.Forms.Label title;
     }
 }
 

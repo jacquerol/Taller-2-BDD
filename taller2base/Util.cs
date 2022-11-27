@@ -8,12 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
+using taller2base;
 
 
 namespace DatabaseUtil
 {
     public static class Util
     {
+        public static Boolean ComponenteLleno(ComboBox sender){ return sender.SelectedItem != null; }
+        public static Boolean ComponenteLleno(TextBox sender) { return sender.Text != ""; }
+
+        public static string ContenidoComponente(ComboBox sender) { return sender.SelectedItem.ToString(); }
+        public static string ContenidoComponente(TextBox sender) { return sender.Text; }
+        public static void DesplegarListado(ComboBox box, string nombreTabla)
+        {
+            box.Items.Clear();
+            string pk = GetTabla("SELECT * FROM " + nombreTabla).Columns[0].ColumnName; //Se asume que la primera columna es la PK ya que solo se usa para entidades especificas
+            DataTable tabla = GetTabla("SELECT * FROM " + nombreTabla + " ORDER BY " + pk);
+            DataTableDisplay display = new DataTableDisplay(tabla, tabla.TableName);
+            display.Show();
+        }
         /**
          * Rellena una combo box con los valores de las claves primarias de los registros de una entidad dada
          */
@@ -98,10 +112,7 @@ namespace DatabaseUtil
             }
             return null;
         }
-        /**
-         * Retorna el listado completo del elemento dado
-         **/
-        public static DataTable GetListado(string tipoDato) { return GetTabla("SELECT * FROM " + tipoDato); }
+       
 
         /* Codigo obsoleto
         public static int checkFields(TextBox[] fields)

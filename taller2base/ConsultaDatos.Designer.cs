@@ -1,12 +1,11 @@
-﻿
-namespace taller2base
+﻿namespace taller2base
 {
     partial class ConsultaDatos
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private global::System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -67,11 +66,13 @@ namespace taller2base
             // 
             // clientOrdersButton
             // 
+            this.clientOrdersButton.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.clientOrdersButton.FormattingEnabled = true;
-            this.clientOrdersButton.Location = new System.Drawing.Point(179, 172);
+            this.clientOrdersButton.Location = new System.Drawing.Point(172, 172);
             this.clientOrdersButton.Name = "clientOrdersButton";
-            this.clientOrdersButton.Size = new System.Drawing.Size(103, 23);
+            this.clientOrdersButton.Size = new System.Drawing.Size(121, 23);
             this.clientOrdersButton.TabIndex = 41;
+            this.clientOrdersButton.Text = "RUT";
             this.clientOrdersButton.DropDown += new System.EventHandler(this.RellenarCliente);
             // 
             // label1
@@ -217,11 +218,13 @@ namespace taller2base
             // 
             // clientPurchaseYearComboBox
             // 
+            this.clientPurchaseYearComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.clientPurchaseYearComboBox.FormattingEnabled = true;
             this.clientPurchaseYearComboBox.Location = new System.Drawing.Point(55, 239);
             this.clientPurchaseYearComboBox.Name = "clientPurchaseYearComboBox";
             this.clientPurchaseYearComboBox.Size = new System.Drawing.Size(174, 23);
             this.clientPurchaseYearComboBox.TabIndex = 48;
+            this.clientPurchaseYearComboBox.Text = "RUT";
             this.clientPurchaseYearComboBox.DropDown += new System.EventHandler(this.RellenarCliente);
             // 
             // Top5Button
@@ -255,11 +258,13 @@ namespace taller2base
             // 
             // providerProductQuantity
             // 
+            this.providerProductQuantity.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.providerProductQuantity.FormattingEnabled = true;
             this.providerProductQuantity.Location = new System.Drawing.Point(55, 297);
             this.providerProductQuantity.Name = "providerProductQuantity";
             this.providerProductQuantity.Size = new System.Drawing.Size(174, 23);
             this.providerProductQuantity.TabIndex = 44;
+            this.providerProductQuantity.Text = "RUT";
             this.providerProductQuantity.DropDown += new System.EventHandler(this.RellenarProveedor);
             this.providerProductQuantity.DropDownClosed += new System.EventHandler(this.CantProductosProveedor);
             // 
@@ -287,11 +292,13 @@ namespace taller2base
             // 
             // providerProductsButton
             // 
+            this.providerProductsButton.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.providerProductsButton.FormattingEnabled = true;
             this.providerProductsButton.Location = new System.Drawing.Point(343, 115);
             this.providerProductsButton.Name = "providerProductsButton";
             this.providerProductsButton.Size = new System.Drawing.Size(114, 23);
             this.providerProductsButton.TabIndex = 38;
+            this.providerProductsButton.Text = "RUT";
             this.providerProductsButton.DropDown += new System.EventHandler(this.RellenarProveedor);
             this.providerProductsButton.DropDownClosed += new System.EventHandler(this.ProductosDeProveedor);
             // 
@@ -308,12 +315,15 @@ namespace taller2base
             // 
             // productProvidersComboBox
             // 
+            this.productProvidersComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.productProvidersComboBox.FormattingEnabled = true;
             this.productProvidersComboBox.Location = new System.Drawing.Point(343, 172);
             this.productProvidersComboBox.Name = "productProvidersComboBox";
             this.productProvidersComboBox.Size = new System.Drawing.Size(114, 23);
             this.productProvidersComboBox.TabIndex = 36;
+            this.productProvidersComboBox.Text = "ID";
             this.productProvidersComboBox.DropDown += new System.EventHandler(this.RellenarProducto);
+            this.productProvidersComboBox.DropDownClosed += new System.EventHandler(this.ProveedoresDeProducto);
             // 
             // label7
             // 
@@ -328,31 +338,38 @@ namespace taller2base
             // 
             // productsByCategoryComboBox
             // 
+            this.productsByCategoryComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.productsByCategoryComboBox.FormattingEnabled = true;
-            this.productsByCategoryComboBox.Location = new System.Drawing.Point(524, 115);
+            this.productsByCategoryComboBox.Location = new System.Drawing.Point(524, 114);
             this.productsByCategoryComboBox.Name = "productsByCategoryComboBox";
             this.productsByCategoryComboBox.Size = new System.Drawing.Size(114, 23);
             this.productsByCategoryComboBox.TabIndex = 34;
+            this.productsByCategoryComboBox.Text = "ID";
+            this.productsByCategoryComboBox.DropDown += new System.EventHandler(this.RellenarCategoria);
+            this.productsByCategoryComboBox.DropDownClosed += new System.EventHandler(this.ProductosCategoria);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Impact", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(511, 93);
+            this.label6.Location = new System.Drawing.Point(485, 93);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(139, 18);
+            this.label6.Size = new System.Drawing.Size(192, 18);
             this.label6.TabIndex = 33;
-            this.label6.Text = "Productos de categoria";
+            this.label6.Text = "Cantidad productos de categoria";
             // 
             // categoryByProductComboBox
             // 
+            this.categoryByProductComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.categoryByProductComboBox.FormattingEnabled = true;
             this.categoryByProductComboBox.Location = new System.Drawing.Point(524, 162);
             this.categoryByProductComboBox.Name = "categoryByProductComboBox";
             this.categoryByProductComboBox.Size = new System.Drawing.Size(114, 23);
             this.categoryByProductComboBox.TabIndex = 32;
+            this.categoryByProductComboBox.Text = "ID";
             this.categoryByProductComboBox.DropDown += new System.EventHandler(this.RellenarProducto);
+            this.categoryByProductComboBox.DropDownClosed += new System.EventHandler(this.CategoriaProducto);
             // 
             // label5
             // 
@@ -367,21 +384,25 @@ namespace taller2base
             // 
             // salesDataButton
             // 
+            this.salesDataButton.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.salesDataButton.FormattingEnabled = true;
             this.salesDataButton.Location = new System.Drawing.Point(172, 115);
             this.salesDataButton.Name = "salesDataButton";
             this.salesDataButton.Size = new System.Drawing.Size(121, 23);
             this.salesDataButton.TabIndex = 30;
+            this.salesDataButton.Text = "ID";
             this.salesDataButton.DropDown += new System.EventHandler(this.RellenarCompra);
             this.salesDataButton.DropDownClosed += new System.EventHandler(this.DatosCompra);
             // 
             // vendorComboBox
             // 
+            this.vendorComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.vendorComboBox.FormattingEnabled = true;
             this.vendorComboBox.Location = new System.Drawing.Point(25, 115);
             this.vendorComboBox.Name = "vendorComboBox";
             this.vendorComboBox.Size = new System.Drawing.Size(121, 23);
             this.vendorComboBox.TabIndex = 29;
+            this.vendorComboBox.Text = "ID empleado";
             this.vendorComboBox.DropDown += new System.EventHandler(this.RellenarVendedor);
             this.vendorComboBox.DropDownClosed += new System.EventHandler(this.DatosVendedor);
             // 
@@ -421,12 +442,15 @@ namespace taller2base
             // 
             // ListadoUniversalComboBox
             // 
+            this.ListadoUniversalComboBox.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.ListadoUniversalComboBox.FormattingEnabled = true;
             this.ListadoUniversalComboBox.Location = new System.Drawing.Point(84, 344);
             this.ListadoUniversalComboBox.Name = "ListadoUniversalComboBox";
             this.ListadoUniversalComboBox.Size = new System.Drawing.Size(103, 23);
             this.ListadoUniversalComboBox.TabIndex = 13;
+            this.ListadoUniversalComboBox.Text = "Tipo";
             this.ListadoUniversalComboBox.DropDown += new System.EventHandler(this.RellenarListadoUniversal);
+            this.ListadoUniversalComboBox.DropDownClosed += new System.EventHandler(this.DesplegarListadoUniversal);
             // 
             // ConsultaDatos
             // 
@@ -446,38 +470,38 @@ namespace taller2base
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button VendorButton;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox ListadoUniversalComboBox;
-        private System.Windows.Forms.ComboBox productProvidersComboBox;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox productsByCategoryComboBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox categoryByProductComboBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox salesDataButton;
-        private System.Windows.Forms.ComboBox vendorComboBox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox providerProductsButton;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox rutTextBox;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox providerProductQuantity;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox clientOrdersButton;
-        private System.Windows.Forms.ComboBox comboBox14;
-        private System.Windows.Forms.ComboBox comboBox15;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button NoSalesButton;
-        private System.Windows.Forms.ComboBox productCategoryButton_category;
-        private System.Windows.Forms.ComboBox productCategoryButton_client;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox clientPurchaseYearComboBox;
-        private System.Windows.Forms.Button Top5Button;
+        private global::System.Windows.Forms.Label label1;
+        private global::System.Windows.Forms.Button VendorButton;
+        private global::System.Windows.Forms.GroupBox groupBox1;
+        private global::System.Windows.Forms.ComboBox ListadoUniversalComboBox;
+        private global::System.Windows.Forms.ComboBox productProvidersComboBox;
+        private global::System.Windows.Forms.Label label7;
+        private global::System.Windows.Forms.ComboBox productsByCategoryComboBox;
+        private global::System.Windows.Forms.Label label6;
+        private global::System.Windows.Forms.ComboBox categoryByProductComboBox;
+        private global::System.Windows.Forms.Label label5;
+        private global::System.Windows.Forms.ComboBox salesDataButton;
+        private global::System.Windows.Forms.ComboBox vendorComboBox;
+        private global::System.Windows.Forms.Label label4;
+        private global::System.Windows.Forms.Label label3;
+        private global::System.Windows.Forms.Label label2;
+        private global::System.Windows.Forms.ComboBox providerProductsButton;
+        private global::System.Windows.Forms.Label label8;
+        private global::System.Windows.Forms.TextBox rutTextBox;
+        private global::System.Windows.Forms.Label label12;
+        private global::System.Windows.Forms.ComboBox providerProductQuantity;
+        private global::System.Windows.Forms.Label label11;
+        private global::System.Windows.Forms.Label label10;
+        private global::System.Windows.Forms.ComboBox clientOrdersButton;
+        private global::System.Windows.Forms.ComboBox comboBox14;
+        private global::System.Windows.Forms.ComboBox comboBox15;
+        private global::System.Windows.Forms.Label label15;
+        private global::System.Windows.Forms.Button NoSalesButton;
+        private global::System.Windows.Forms.ComboBox productCategoryButton_category;
+        private global::System.Windows.Forms.ComboBox productCategoryButton_client;
+        private global::System.Windows.Forms.Label label14;
+        private global::System.Windows.Forms.Label label13;
+        private global::System.Windows.Forms.ComboBox clientPurchaseYearComboBox;
+        private global::System.Windows.Forms.Button Top5Button;
     }
 }

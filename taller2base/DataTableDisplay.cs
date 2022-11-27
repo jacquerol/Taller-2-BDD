@@ -10,21 +10,34 @@ namespace taller2base
 {
     public partial class DataTableDisplay : Form
     {
-        string titulo; DataTable tabla;
+        private BindingSource bindingSource = new BindingSource();
         public DataTableDisplay(DataTable tabla, string titulo)
         {
-            this.titulo = titulo;
-            this.tabla = tabla;
+            InitializeComponent();
+            label.Text = titulo;
+            bindingSource = new BindingSource();
+            bindingSource.DataSource = tabla;
+            this.Controls.Add(dataGridView);
         }
 
         private void DataTableDisplay_Load(object sender, EventArgs e)
         {
-            dataGridView.ColumnCount = this.tabla.Columns.Count;
-            for (int i = 0; i < tabla.Columns.Count; i++)
-            {
-                this.dataGridView.Columns[i].Name = tabla.Columns[i].ColumnName.ToString();
+            dataGridView.Dock = DockStyle.Bottom;
+            dataGridView.AutoGenerateColumns = true;
+            dataGridView.DataSource = bindingSource;
+            dataGridView.AutoSizeRowsMode =
+                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dataGridView.BorderStyle = BorderStyle.Fixed3D;
+        }
+        ~DataTableDisplay()
+        {
 
-            }
+        }
+        private void exit(object sender, EventArgs e){this.Close();}
+
+        private void label_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
