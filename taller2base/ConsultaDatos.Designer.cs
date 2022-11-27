@@ -48,8 +48,6 @@ namespace taller2base
             this.providerProductQuantity = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.providerQuantityButton = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.providerProductsButton = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.productProvidersComboBox = new System.Windows.Forms.ComboBox();
@@ -115,8 +113,6 @@ namespace taller2base
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.clientOrdersButton);
-            this.groupBox1.Controls.Add(this.providerQuantityButton);
-            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.providerProductsButton);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.productProvidersComboBox);
@@ -156,6 +152,7 @@ namespace taller2base
             this.comboBox15.Name = "comboBox15";
             this.comboBox15.Size = new System.Drawing.Size(174, 23);
             this.comboBox15.TabIndex = 55;
+            this.comboBox15.DropDown += new System.EventHandler(this.RellenarCliente);
             // 
             // label15
             // 
@@ -185,6 +182,7 @@ namespace taller2base
             this.productCategoryButton_category.Name = "productCategoryButton_category";
             this.productCategoryButton_category.Size = new System.Drawing.Size(174, 23);
             this.productCategoryButton_category.TabIndex = 52;
+            this.productCategoryButton_category.DropDown += new System.EventHandler(this.RellenarCategoria);
             // 
             // productCategoryButton_client
             // 
@@ -193,6 +191,7 @@ namespace taller2base
             this.productCategoryButton_client.Name = "productCategoryButton_client";
             this.productCategoryButton_client.Size = new System.Drawing.Size(174, 23);
             this.productCategoryButton_client.TabIndex = 51;
+            this.productCategoryButton_client.DropDown += new System.EventHandler(this.RellenarCliente);
             // 
             // label14
             // 
@@ -262,6 +261,7 @@ namespace taller2base
             this.providerProductQuantity.Size = new System.Drawing.Size(174, 23);
             this.providerProductQuantity.TabIndex = 44;
             this.providerProductQuantity.DropDown += new System.EventHandler(this.RellenarProveedor);
+            this.providerProductQuantity.DropDownClosed += new System.EventHandler(this.CantProductosProveedor);
             // 
             // label11
             // 
@@ -285,25 +285,6 @@ namespace taller2base
             this.label10.TabIndex = 42;
             this.label10.Text = "Ordenes de cliente";
             // 
-            // providerQuantityButton
-            // 
-            this.providerQuantityButton.FormattingEnabled = true;
-            this.providerQuantityButton.Location = new System.Drawing.Point(343, 172);
-            this.providerQuantityButton.Name = "providerQuantityButton";
-            this.providerQuantityButton.Size = new System.Drawing.Size(114, 23);
-            this.providerQuantityButton.TabIndex = 40;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Impact", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(326, 151);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(150, 18);
-            this.label9.TabIndex = 39;
-            this.label9.Text = "Proveedores de producto";
-            // 
             // providerProductsButton
             // 
             this.providerProductsButton.FormattingEnabled = true;
@@ -312,6 +293,7 @@ namespace taller2base
             this.providerProductsButton.Size = new System.Drawing.Size(114, 23);
             this.providerProductsButton.TabIndex = 38;
             this.providerProductsButton.DropDown += new System.EventHandler(this.RellenarProveedor);
+            this.providerProductsButton.DropDownClosed += new System.EventHandler(this.ProductosDeProveedor);
             // 
             // label8
             // 
@@ -327,16 +309,17 @@ namespace taller2base
             // productProvidersComboBox
             // 
             this.productProvidersComboBox.FormattingEnabled = true;
-            this.productProvidersComboBox.Location = new System.Drawing.Point(524, 213);
+            this.productProvidersComboBox.Location = new System.Drawing.Point(343, 172);
             this.productProvidersComboBox.Name = "productProvidersComboBox";
             this.productProvidersComboBox.Size = new System.Drawing.Size(114, 23);
             this.productProvidersComboBox.TabIndex = 36;
+            this.productProvidersComboBox.DropDown += new System.EventHandler(this.RellenarProducto);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Impact", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(511, 192);
+            this.label7.Location = new System.Drawing.Point(326, 151);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(150, 18);
@@ -369,6 +352,7 @@ namespace taller2base
             this.categoryByProductComboBox.Name = "categoryByProductComboBox";
             this.categoryByProductComboBox.Size = new System.Drawing.Size(114, 23);
             this.categoryByProductComboBox.TabIndex = 32;
+            this.categoryByProductComboBox.DropDown += new System.EventHandler(this.RellenarProducto);
             // 
             // label5
             // 
@@ -388,6 +372,8 @@ namespace taller2base
             this.salesDataButton.Name = "salesDataButton";
             this.salesDataButton.Size = new System.Drawing.Size(121, 23);
             this.salesDataButton.TabIndex = 30;
+            this.salesDataButton.DropDown += new System.EventHandler(this.RellenarCompra);
+            this.salesDataButton.DropDownClosed += new System.EventHandler(this.DatosCompra);
             // 
             // vendorComboBox
             // 
@@ -397,6 +383,7 @@ namespace taller2base
             this.vendorComboBox.Size = new System.Drawing.Size(121, 23);
             this.vendorComboBox.TabIndex = 29;
             this.vendorComboBox.DropDown += new System.EventHandler(this.RellenarVendedor);
+            this.vendorComboBox.DropDownClosed += new System.EventHandler(this.DatosVendedor);
             // 
             // label4
             // 
@@ -474,8 +461,6 @@ namespace taller2base
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox providerQuantityButton;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox providerProductsButton;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox rutTextBox;

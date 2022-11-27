@@ -1,7 +1,7 @@
 ﻿
 namespace taller2base
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Variable del diseñador necesaria.

@@ -14,17 +14,21 @@ namespace DatabaseUtil
 {
     public static class Util
     {
-        public static string[] FilaALista(DataTable tabla, int posicion)
+        /**
+         * Rellena una combo box con los valores de las claves primarias de los registros de una entidad dada
+         */
+        public static void RellenarConRegistros(ComboBox box, string nombreTabla)
         {
-            string[] resultado = new string[tabla.Rows.Count];
+            box.Items.Clear();
+            string pk = GetTabla("SELECT * FROM " + nombreTabla).Columns[0].ColumnName; //Se asume que la primera columna es la PK ya que solo se usa para entidades especificas
+            DataTable tabla = GetTabla("SELECT DISTINCT " + pk +" FROM " +nombreTabla +" ORDER BY " +pk);
             for (int i = 0; i < tabla.Rows.Count; i++)
             {
-                resultado[i] = tabla.Rows[i][0].ToString();
+                box.Items.Add(tabla.Rows[i][0].ToString());
             }
-            return resultado;
         }
         /**
-         * Rellena una combo box con los elementos de un string separados por comas
+         * Rellena una combo box con los elementos de un vector de strings
          **/
         public static void RellenarComboBox(ComboBox box, string[] fields)
         {

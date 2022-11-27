@@ -21,39 +21,21 @@ namespace taller2base
         {
             InitializeComponent();
         }
-        public void RellenarCliente(object sender, EventArgs e)
-        {
-            RellenarComboBox((ComboBox)sender,
-                FilaALista(GetTabla("SELECT DISTINCT RUT FROM CLIENTE ORDER BY RUT"), 0));
-        }
-        public void RellenarVendedor(object sender, EventArgs e)
-        {
-            RellenarComboBox((ComboBox)sender,
-                FilaALista(GetTabla("SELECT DISTINCT NUMEMPLEADO FROM VENDEDOR ORDER BY NUMEMPLEADO"), 0));
-        }
-        public void RellenarCompra(object sender, EventArgs e)
-        {
-            RellenarComboBox((ComboBox)sender,
-                FilaALista(GetTabla("SELECT DISTINCT IDORDEN FROM ORDEN ORDER BY IDORDEN"), 0));
-        }
-        public void RellenarProveedor(object sender, EventArgs e)
-        {
-            RellenarComboBox((ComboBox)sender,
-                FilaALista(GetTabla("SELECT DISTINCT RUT FROM PROVEEDOR ORDER BY RUT"), 0));
-        }
+        public void RellenarCliente(object sender, EventArgs e){RellenarConRegistros((ComboBox)sender, "cliente");}
+        public void RellenarCategoria(object sender, EventArgs e){RellenarConRegistros((ComboBox)sender, "categoria");}
+        public void RellenarVendedor(object sender, EventArgs e){RellenarConRegistros((ComboBox)sender, "vendedor");}
+        public void RellenarCompra(object sender, EventArgs e){RellenarConRegistros((ComboBox)sender, "orden");}
+        public void RellenarProveedor(object sender, EventArgs e){RellenarConRegistros((ComboBox)sender, "proveedor");}
+        public void RellenarProducto(object sender, EventArgs e){RellenarConRegistros((ComboBox)sender, "producto");}
+        public void RellenarListadoUniversal(object sender, EventArgs e) { RellenarComboBox(ListadoUniversalComboBox, "Proveedor, Cliente, Producto, Categoria, Vendedor".Split(", ")); }
         public void DatosPorRut(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar != ((char)Keys.Enter)) return;
-            DesplegarDatos(GetTabla("SELECT * FROM CLIENTE c WHERE c.rut = '" + rutTextBox.Text + "'"));
-        }
-        public void RellenarListadoUniversal(object sender, EventArgs e)
-        {
-            RellenarComboBox(ListadoUniversalComboBox, "Proveedor, Cliente, Producto, Categoria, Vendedor".Split(", "));
+            if (e.KeyChar == ((char)Keys.Enter)) DesplegarDatos(GetTabla("SELECT * FROM CLIENTE c WHERE c.rut = '" + rutTextBox.Text + "'"));
         }
         
         public void DatosCompra(object sender, EventArgs e)
         {
-
+            if (providerProductQuantity.SelectedItem != null) DesplegarDatos(GetTabla("SELECT * FROM ORDEN WHERE IDORDEN = '" + salesDataButton.SelectedItem.ToString() + "'"));
         } 
         public void ProductosCompradosAnual(object sender, EventArgs e)
         {
@@ -61,12 +43,23 @@ namespace taller2base
         }
         public void CantProductosProveedor(object sender, EventArgs e)
         {
-
+            if (providerProductQuantity.SelectedItem == null) return;
+            MessageBox.Show(GetDato("select DISTINCT count(suministra.idProducto) " +
+                "from((suministra inner join producto on suministra.idProducto = producto.id) " +
+                "inner join proveedor on suministra.rutProveedor = proveedor.rut and " +
+                "proveedor.rut = '" + providerProductQuantity.SelectedItem.ToString() + "')"), "Cantidad de productos de "+providerProductQuantity.SelectedItem.ToString()); 
         }
-        
+        public void DatosVendedor(object sender, EventArgs e)
+        {
+            if (vendorComboBox.SelectedItem != null) DesplegarDatos(GetTabla("SELECT * FROM VENDEDOR WHERE NUMEMPLEADO = '" + vendorComboBox.SelectedItem.ToString() + "'"));
+        }
         public void ProductosDeProveedor(object sender, EventArgs e)
         {
-
+            if (productProvidersComboBox.SelectedItem == null) return;
+            DataTableDisplay display = new DataTableDisplay(
+                GetTabla("select * from producto"),
+                "Productos del proveedor");
+            display.Show();
         }
         public void ProveedoresDeProducto(object sender, EventArgs e)
         {
@@ -104,9 +97,6 @@ namespace taller2base
         {
 
         }
-
-
-
         /// <summary>
         /// cringe
         /// función que trabaja con los datos del cliente para poder consultar los datos correspondientes
