@@ -20,6 +20,7 @@ namespace taller2base
             bindingSource = new BindingSource();
             bindingSource.DataSource = tabla;
             this.Controls.Add(dataGridView);
+            this.Show();
         }
         /**
          * Sobrecarga del constructor para realizar querys de envio
@@ -37,6 +38,7 @@ namespace taller2base
             this.Controls.Add(dataGridView);
             this.insertData = insertData;
             this.entidad = entidad;
+            this.Show();
         }
         private void DataTableDisplay_Load(object sender, EventArgs e)
         {
@@ -55,7 +57,9 @@ namespace taller2base
             else sendButton.Hide();
         }
         ~DataTableDisplay(){}
-
+        /**
+         * Genera una query de insercion utilizando los valores guardados en la tabla de la form
+         **/
         private void insertar(object sender, EventArgs e)
         {
             DataTable tabla = convertirEnDataTable(this.dataGridView);
@@ -77,7 +81,9 @@ namespace taller2base
             MessageBox.Show(query);
             Modificar(query);
         }
-        
+        /**
+         * Convierte un componente DataGridView en un objeto DataTable
+         **/
         private DataTable convertirEnDataTable(DataGridView gridView)
         {
             DataTable dt = new DataTable();

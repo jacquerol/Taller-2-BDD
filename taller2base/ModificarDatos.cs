@@ -24,6 +24,10 @@ namespace taller2base
         {
 
         }
+        private void modificar(object sender, EventArgs e)
+        {
+
+        }
         /**
          * Insertar un dato a la base de datos. Puede ser una de las siguientes opciones: (2)
          * Insertar un nuevo cliente, Insertar un nuevo proveedor, Insertar un nuevo producto, 
@@ -31,14 +35,12 @@ namespace taller2base
          **/
         private void insertar(object sender, EventArgs e)
         {
-            ComboBox box = (ComboBox)sender; string entidad = box.SelectedItem.ToString(); string[] campos;
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return; string entidad = box.SelectedItem.ToString();
             for(int i = 0; i < entidades.Length; i++)
             {
                 if(entidad == entidades[i])
                 {
-                    campos = getCamposEntidad(entidades[i]);
-                    DataTableDisplay display = new DataTableDisplay(campos, entidad, true);
-                    display.Show();
+                    DataTableDisplay display = new DataTableDisplay(getCamposEntidad(entidades[i]), entidad, true);
                 }
             }
         }

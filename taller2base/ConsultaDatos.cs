@@ -45,8 +45,10 @@ namespace taller2base
         public void datosVendedor(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
-            DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM VENDEDOR WHERE NUMEMPLEADO = '" + box.SelectedItem.ToString() + "'"), "Datos del vendedor " + box.SelectedItem.ToString());
-            display.Show();
+            DataTableDisplay display = 
+                new DataTableDisplay(getTabla(
+                    "SELECT * FROM VENDEDOR WHERE NUMEMPLEADO = '" + box.SelectedItem.ToString() + "'"), 
+                    "Datos del vendedor " + box.SelectedItem.ToString());
         }
         /**
          * Los vendedores de mayor antigüedad y los vendedores de menor antigüedad en la empresa (indicar los años de antigüedad) (3) 
@@ -56,8 +58,7 @@ namespace taller2base
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
             string query = "Rellenar con query";
-            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
-            display.Show();
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de " + box.SelectedItem.ToString());
         }
         /**
          * Datos de una orden de compra, incluyendo el cliente, el vendedor y los productos de la orden (4)
@@ -66,7 +67,6 @@ namespace taller2base
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
             DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM ORDEN INNER JOIN ORDENPRODUCTO ON ORDENPRODUCTO.IDORDEN = ORDEN.IDORDEN WHERE ORDEN.IDORDEN = '" + box.SelectedItem.ToString() + "'"), "Datos de la compra " + box.SelectedItem.ToString());
-            display.Show();
         }
         /**
          * La categoría de un producto (5)
@@ -95,7 +95,6 @@ namespace taller2base
                 getTabla("select distinct p.nombre, p.rut from producto inner join suministra on suministra.idproducto = producto.id and producto.id = '" + box.SelectedItem.ToString() +
                 "' inner join proveedor p on p.rut = suministra.rutproveedor"),
                 "Proveedores del producto " + box.SelectedItem.ToString());
-            display.Show();
         }
         /**
          * Los productos que suministra un proveedor, indicando el precio y la cantidad (8)
@@ -107,7 +106,6 @@ namespace taller2base
                 "select producto.precioVenta from proveedor inner join suministra on proveedor.rut = suministra.rutProveedor and proveedor.rut = " + box.SelectedItem.ToString() + " inner join producto on suministra.idProducto = producto.id";
             DataTableDisplay display = new DataTableDisplay(getTabla(query),
                 "Productos del proveedor " + box.SelectedItem.ToString());
-            display.Show();
         }
         /**
          * Cantidad de órdenes de compra asociadas a un cliente, en los últimos 30 días (9) #Incompleta
@@ -116,7 +114,6 @@ namespace taller2base
         {
             TextBox box = (TextBox)sender; if (!componenteLleno(box)) return;
             DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM CLIENTE WHERE RUT = '" + box.Text + "'"), "Datos del vendedor " + box.Text);
-            display.Show();
         }
         /**
          * Cantidad total de productos que suministra un vendedor (10)
@@ -137,7 +134,6 @@ namespace taller2base
         {
             TextBox box = (TextBox)sender; if (!componenteLleno(box) || e.KeyChar != ((char)Keys.Enter)) return;
             DataTableDisplay display = new DataTableDisplay(getTabla("SELECT * FROM CLIENTE WHERE RUT = '" + box.Text + "'"), "Datos del vendedor " + box.Text);
-            display.Show();
         }
         /**
          * Los 5 productos más vendidos de la semana anterior, indicar la cantidad de cada producto (12)
@@ -146,8 +142,7 @@ namespace taller2base
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
             string query = "Rellenar con query";
-            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
-            display.Show();
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de  " + box.SelectedItem.ToString());
         }
         /**
          * Los productos que ha comprado un cierto cliente durante el año, indicar la cantidad de cada producto (13)
@@ -156,8 +151,7 @@ namespace taller2base
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
             string query = "Rellenar con query";
-            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
-            display.Show();
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de " + box.SelectedItem.ToString());
         }
         /**
          * Los productos de una cierta categoría que ha comprado un cliente (14)
@@ -173,15 +167,14 @@ namespace taller2base
             }
         }
         /**
-        * Los productos que no han participado en órdenes de compra en el último mes  (15)
+        * Los productos que no han participado en órdenes de compra en el último mes (15)
         * #Incompleta
         **/
         public void ProductosSinDemanda(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
             string query = "Rellenar con query";
-            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
-            display.Show();
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de " + box.SelectedItem.ToString());
         }
         /**
          * Los productos que fueron comprados por los clientes en un cierto día (16)
@@ -191,8 +184,7 @@ namespace taller2base
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
             string query = "Rellenar con query";
-            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
-            display.Show();
+            DataTableDisplay(getTabla(query), "Datos de " + box.SelectedItem.ToString());
         }
         public void RellenarCliente(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "cliente"); }
         public void RellenarCategoria(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "categoria"); }
