@@ -18,7 +18,6 @@ namespace taller2base
         
         public string receivedData;
         public string[] entidades;
-        //por hacer: eliminar la funcion mostrar tabla porque causa problemas si el combobox esta vacio
         public ConsultaDatos()
         {
             InitializeComponent();
@@ -53,8 +52,12 @@ namespace taller2base
          * Los vendedores de mayor antigüedad y los vendedores de menor antigüedad en la empresa (indicar los años de antigüedad) (3) 
          * #Incompleta
          **/
-        public void VendedoresAntiguedad(object sender, EventArgs e){
-
+        public void VendedoresAntiguedad(object sender, EventArgs e)
+        {
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            string query = "Rellenar con query";
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
+            display.Show();
         }
         /**
          * Datos de una orden de compra, incluyendo el cliente, el vendedor y los productos de la orden (4)
@@ -141,14 +144,20 @@ namespace taller2base
          **/
         public void Top5Semana(object sender, EventArgs e)
         {
-
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            string query = "Rellenar con query";
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
+            display.Show();
         }
         /**
          * Los productos que ha comprado un cierto cliente durante el año, indicar la cantidad de cada producto (13)
          **/
         public void ProductosCompradosAnual(object sender, EventArgs e)
         {
-
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            string query = "Rellenar con query";
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
+            display.Show();
         }
         /**
          * Los productos de una cierta categoría que ha comprado un cliente (14)
@@ -165,21 +174,26 @@ namespace taller2base
         }
         /**
         * Los productos que no han participado en órdenes de compra en el último mes  (15)
+        * #Incompleta
         **/
         public void ProductosSinDemanda(object sender, EventArgs e)
         {
-
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            string query = "Rellenar con query";
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
+            display.Show();
         }
         /**
          * Los productos que fueron comprados por los clientes en un cierto día (16)
+         * #Incompleta
          **/
         public void ProductosCompradosPorDia(object sender, EventArgs e)
         {
-
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            string query = "Rellenar con query";
+            DataTableDisplay display = new DataTableDisplay(getTabla(query), "Datos de la compra " + box.SelectedItem.ToString());
+            display.Show();
         }
-
-
-        
         public void RellenarCliente(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "cliente"); }
         public void RellenarCategoria(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "categoria"); }
         public void RellenarVendedor(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "vendedor"); }
