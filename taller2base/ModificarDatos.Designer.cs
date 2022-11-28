@@ -50,6 +50,7 @@ namespace taller2base
             this.salesButton.TabIndex = 11;
             this.salesButton.Text = "Atender compra";
             this.salesButton.UseVisualStyleBackColor = true;
+            this.salesButton.Click += new System.EventHandler(this.atenderCompra);
             // 
             // stockButton
             // 

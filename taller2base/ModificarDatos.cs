@@ -28,6 +28,31 @@ namespace taller2base
 
         }
         /**
+         * Atender la orden de compra de un cliente (se debe tener saldo suficiente para aprobar la orden) (1)
+         **/
+        private void atenderCompra(object sender, EventArgs e)
+        {
+            new DataTableDisplay(getCamposEntidad("ORDENPRODUCTO"), "ordenproducto", true);
+            new DataTableDisplay(getCamposEntidad("ORDEN"), "orden", true);
+        }
+        /**
+         * Insertar un dato a la base de datos. Puede ser una de las siguientes opciones: (2)
+         * Insertar un nuevo cliente, Insertar un nuevo proveedor, Insertar un nuevo producto, 
+         * Insertar un nuevo vendedor, Insertar una nueva categoría 
+         **/
+        private void insertar(object sender, EventArgs e)
+        {
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return; string entidad = box.SelectedItem.ToString();
+            for (int i = 0; i < entidades.Length; i++)
+            {
+                if (entidad == entidades[i])
+                {
+                    DataTableDisplay display = new DataTableDisplay(getCamposEntidad(entidades[i]), entidad, true);
+
+                }
+            }
+        }
+        /**
          * Modificar un dato de la base de datos. Puede ser uno de los siguientes: (3)
          * Cambiar el precio de venta de un producto al cliente, Cambiar el salario a un vendedor, 
          * Agregar dinero a la cuenta de un cliente, Eliminar un cliente (solamente se pone una marca de cliente inactivo) 
@@ -52,22 +77,7 @@ namespace taller2base
                 }
             }
         }
-        /**
-         * Insertar un dato a la base de datos. Puede ser una de las siguientes opciones: (2)
-         * Insertar un nuevo cliente, Insertar un nuevo proveedor, Insertar un nuevo producto, 
-         * Insertar un nuevo vendedor, Insertar una nueva categoría 
-         **/
-        private void insertar(object sender, EventArgs e)
-        {
-            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return; string entidad = box.SelectedItem.ToString();
-            for(int i = 0; i < entidades.Length; i++)
-            {
-                if(entidad == entidades[i])
-                {
-                    DataTableDisplay display = new DataTableDisplay(getCamposEntidad(entidades[i]), entidad, true);
-                }
-            }
-        }
+
         
         private void rellenarModificaciones(object sender, EventArgs e){RellenarComboBox((ComboBox)sender, modificaciones);}
         private void rellenarEntidades(object sender, EventArgs e){RellenarComboBox((ComboBox)sender, entidades);}

@@ -64,19 +64,17 @@ namespace taller2base
             dataGridView.Dock = DockStyle.Bottom;
             dataGridView.AutoGenerateColumns = true;
             dataGridView.DataSource = bindingSource;
-            dataGridView.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dataGridView.BorderStyle = BorderStyle.Fixed3D;
+            dataGridView.AllowUserToAddRows = false;
             if (this.insertData & !this.updateData)
             {
                 dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
-                dataGridView.AllowUserToAddRows = false;
                 sendButton.Show();
             }
             else if (this.updateData & !this.insertData)
             {
                 dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
-                dataGridView.AllowUserToAddRows = false;
                 sendButton.Show();
             }
         }
@@ -127,6 +125,7 @@ namespace taller2base
                 if (!int.TryParse(pkValue, out int parseInt2)) pkValue = "'" + pkValue + "'";
                 query += " WHERE " + tabla.Columns[0].ColumnName.ToString() + " = " + pkValue;
             }
+            MessageBox.Show(query);
             añadirDato(query);
 
         }
