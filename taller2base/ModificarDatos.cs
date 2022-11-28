@@ -13,20 +13,44 @@ namespace taller2base
 {
     public partial class ModificarDatos : Form
     {
-        public string[] entidades;
+        public string[] entidades, modificaciones;
+        public string selectedEntity;
         public ModificarDatos()
         {
             InitializeComponent();
             this.entidades = new string[] { "Cliente", "Categoria", "Vendedor", "Orden", "Proveedor", "Producto" };
+            this.modificaciones = new string[] { "Cambiar precio", "Cambiar salario", "Agregar saldo", "Eliminar cliente"};
+            this.selectedEntity = "";
         }
 
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
         }
-        private void modificar(object sender, EventArgs e)
+        /**
+         * Modificar un dato de la base de datos. Puede ser uno de los siguientes: (3)
+         * Cambiar el precio de venta de un producto al cliente, Cambiar el salario a un vendedor, 
+         * Agregar dinero a la cuenta de un cliente, Eliminar un cliente (solamente se pone una marca de cliente inactivo) 
+         **/
+        private void enviarModificacion(object sender, EventArgs e)
         {
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(modifyComboBox) || !componenteLleno(registroComboBox)) return;
+            string operacion = modifyComboBox.SelectedItem.ToString(); string pk = registroComboBox.SelectedItem.ToString();
+            if(operacion != "Eliminar cliente") new DataTableDisplay(selectedEntity, pk);
 
+        }
+        private void seleccionarEntidad(object sender, EventArgs e)
+        {
+            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return; string operacion = box.SelectedItem.ToString();
+            string[] entidadOperacion = new string[] { "Producto", "Vendedor", "Cliente", "Cliente" };
+            for(int i = 0; i < entidadOperacion.Length; i++)
+            {
+                if(operacion == modificaciones[i])
+                {
+                    this.selectedEntity = entidadOperacion[i];
+                    RellenarConRegistros(registroComboBox, entidadOperacion[i]);
+                }
+            }
         }
         /**
          * Insertar un dato a la base de datos. Puede ser una de las siguientes opciones: (2)
@@ -44,14 +68,9 @@ namespace taller2base
                 }
             }
         }
-        private void cargarEntidades(object sender, EventArgs e)
-        {
-            ComboBox box = (ComboBox)sender;
-            for(int i = 0; i < entidades.Length; i++)
-            {
-                box.Items.Add(entidades[i]);
-            }
-        }
+        
+        private void rellenarModificaciones(object sender, EventArgs e){RellenarComboBox((ComboBox)sender, modificaciones);}
+        private void rellenarEntidades(object sender, EventArgs e){RellenarComboBox((ComboBox)sender, entidades);}
         private void label1_Click(object sender, EventArgs e)
         {
 

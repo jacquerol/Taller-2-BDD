@@ -33,6 +33,7 @@ namespace taller2base
             this.stockButton = new System.Windows.Forms.Button();
             this.title = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.registroComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.modifyComboBox = new System.Windows.Forms.ComboBox();
@@ -74,6 +75,7 @@ namespace taller2base
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.registroComboBox);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.modifyComboBox);
@@ -88,6 +90,15 @@ namespace taller2base
             this.groupBox1.Size = new System.Drawing.Size(619, 324);
             this.groupBox1.TabIndex = 49;
             this.groupBox1.TabStop = false;
+            // 
+            // registroComboBox
+            // 
+            this.registroComboBox.FormattingEnabled = true;
+            this.registroComboBox.Location = new System.Drawing.Point(322, 245);
+            this.registroComboBox.Name = "registroComboBox";
+            this.registroComboBox.Size = new System.Drawing.Size(172, 23);
+            this.registroComboBox.TabIndex = 25;
+            this.registroComboBox.DropDownClosed += new System.EventHandler(this.enviarModificacion);
             // 
             // label2
             // 
@@ -119,6 +130,8 @@ namespace taller2base
             this.modifyComboBox.Name = "modifyComboBox";
             this.modifyComboBox.Size = new System.Drawing.Size(172, 23);
             this.modifyComboBox.TabIndex = 22;
+            this.modifyComboBox.DropDown += new System.EventHandler(this.rellenarModificaciones);
+            this.modifyComboBox.DropDownClosed += new System.EventHandler(this.seleccionarEntidad);
             // 
             // insertComboBox
             // 
@@ -127,7 +140,7 @@ namespace taller2base
             this.insertComboBox.Name = "insertComboBox";
             this.insertComboBox.Size = new System.Drawing.Size(172, 23);
             this.insertComboBox.TabIndex = 21;
-            this.insertComboBox.DropDown += new System.EventHandler(this.cargarEntidades);
+            this.insertComboBox.DropDown += new System.EventHandler(this.rellenarEntidades);
             this.insertComboBox.DropDownClosed += new System.EventHandler(this.insertar);
             // 
             // ModificarDatos
@@ -157,5 +170,6 @@ namespace taller2base
         private global::System.Windows.Forms.Label label1;
         private global::System.Windows.Forms.ComboBox modifyComboBox;
         private global::System.Windows.Forms.ComboBox insertComboBox;
+        private System.Windows.Forms.ComboBox registroComboBox;
     }
 }

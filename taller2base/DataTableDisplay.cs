@@ -12,7 +12,7 @@ namespace taller2base
     public partial class DataTableDisplay : Form
     {
         private BindingSource bindingSource = new BindingSource();
-        private Boolean insertData = false; string[] columnas; string entidad;
+        private Boolean insertData = false; private Boolean updateData = false; string[] columnas; string entidad;
         public DataTableDisplay(DataTable tabla, string titulo)
         {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace taller2base
             this.Show();
         }
         /**
-         * Sobrecarga del constructor para realizar querys de envio
+         * Sobrecarga del constructor para realizar queries INSERT
          **/
         public DataTableDisplay(string[] columnas, string entidad, Boolean insertData=true)
         {
@@ -37,6 +37,24 @@ namespace taller2base
             bindingSource.DataSource = tabla;
             this.Controls.Add(dataGridView);
             this.insertData = insertData;
+            this.entidad = entidad;
+            this.Show();
+        }
+        /**
+         * Sobrecarga del constructor para realizar queries UPDATE
+         **/
+        public DataTableDisplay(string entidad, string pk, Boolean updateData = true)
+        {
+            InitializeComponent();
+            label.Text = "Actualizar " + entidad;
+            bindingSource = new BindingSource();
+            DataTable tabla = new DataTable();
+            string pkCampo = getTabla("SELECT * FROM " + entidad).Columns[0].ColumnName;
+            if (!int.TryParse(pk, out int parseInt)) pk = "'" + pk + "'";
+            tabla = getTabla("SELECT * FROM " + entidad + " WHERE " + pkCampo + " = " + pk);
+            bindingSource.DataSource = tabla;
+            this.Controls.Add(dataGridView);
+            this.updateData = updateData;
             this.entidad = entidad;
             this.Show();
         }
@@ -54,13 +72,20 @@ namespace taller2base
                 sendButton.Show();
                 dataGridView.AllowUserToAddRows = false;
             }
+            if (this.updateData)
+            {
+                dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
+                dataGridView.AllowUserToAddRows = false;
+                sendButton.Show();
+            }
             else sendButton.Hide();
         }
         ~DataTableDisplay(){}
         /**
          * Genera una query de insercion utilizando los valores guardados en la tabla de la form
+         * Si el modo update está activado envia una query update
          **/
-        private void insertar(object sender, EventArgs e)
+        private void enviar(object sender, EventArgs e)
         {
             DataTable tabla = convertirEnDataTable(this.dataGridView);
             if (!datosLlenados(tabla))
@@ -68,22 +93,42 @@ namespace taller2base
                 MessageBox.Show("Complete todos los campos.", "Error");
                 return;
             }
-            string query = "INSERT INTO "+this.entidad+" (";
-            for(int i = 0; i < tabla.Columns.Count; i++)
+            string query = "";
+            if (this.insertData)
             {
-                query += tabla.Columns[i].ColumnName.ToString();
-                if (i < tabla.Columns.Count-1) query += ", ";
+                query = "INSERT INTO " + this.entidad + " (";
+                for (int i = 0; i < tabla.Columns.Count; i++)
+                {
+                    query += tabla.Columns[i].ColumnName.ToString();
+                    if (i < tabla.Columns.Count - 1) query += ", ";
+                }
+                query += ") VALUES (";
+                for (int i = 0; i < tabla.Columns.Count; i++)
+                {
+                    string cell = tabla.Rows[0][i].ToString();
+                    if (!int.TryParse(tabla.Rows[0][i].ToString(), out int parseInt)) cell = "'" + cell + "'";
+                    query += cell;
+                    if (i < tabla.Columns.Count - 1) query += ", ";
+                }
+                query += ")";
             }
-            query += ") VALUES (";
-            for (int i = 0; i < tabla.Columns.Count; i++)
+            else if (this.updateData)
             {
-                string cell = tabla.Rows[0][i].ToString();
-                if (!int.TryParse(tabla.Rows[0][i].ToString(), out int parseInt)) cell = "'" + cell + "'";
-                query += cell;
-                if (i < tabla.Columns.Count - 1) query += ", ";
+                query = "UPDATE " + this.entidad + " SET ";
+                for (int i = 1; i < tabla.Columns.Count; i++)
+                {
+                    query += tabla.Columns[i].ColumnName.ToString() + "=";
+                    string cell = tabla.Rows[0][i].ToString();
+                    if (!int.TryParse(tabla.Rows[0][i].ToString(), out int parseInt)) cell = "'" + cell + "'";
+                    query += cell;
+                    if (i < tabla.Columns.Count - 1) query += ", ";
+                }
+                string pkValue = tabla.Rows[0][0].ToString();
+                if (!int.TryParse(pkValue, out int parseInt2)) pkValue = "'" + pkValue + "'";
+                query += " WHERE " + tabla.Columns[0].ColumnName.ToString() + " = " + pkValue;
             }
-            query += ")";
             añadirDato(query);
+
         }
         private Boolean datosLlenados(DataTable tabla)
         {
