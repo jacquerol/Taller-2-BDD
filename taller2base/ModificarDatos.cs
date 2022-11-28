@@ -23,10 +23,6 @@ namespace taller2base
             this.selectedEntity = "";
         }
 
-        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
         /**
          * Atender la orden de compra de un cliente (se debe tener saldo suficiente para aprobar la orden) (1)
          **/

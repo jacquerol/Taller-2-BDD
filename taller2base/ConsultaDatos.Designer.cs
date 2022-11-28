@@ -32,9 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.VendorButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox14 = new System.Windows.Forms.ComboBox();
-            this.comboBox15 = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.NoSalesButton = new System.Windows.Forms.Button();
             this.productCategoryButton_category = new System.Windows.Forms.ComboBox();
             this.productCategoryButton_client = new System.Windows.Forms.ComboBox();
@@ -74,6 +71,7 @@
             this.clientOrdersButton.TabIndex = 41;
             this.clientOrdersButton.Text = "RUT";
             this.clientOrdersButton.DropDown += new System.EventHandler(this.RellenarCliente);
+            this.clientOrdersButton.DropDownClosed += new System.EventHandler(this.ordenesCliente);
             // 
             // label1
             // 
@@ -95,12 +93,10 @@
             this.VendorButton.TabIndex = 18;
             this.VendorButton.Text = "Vendedores de mayor y menor antiguedad";
             this.VendorButton.UseVisualStyleBackColor = true;
+            this.VendorButton.Click += new System.EventHandler(this.VendedoresAntiguedad);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.comboBox14);
-            this.groupBox1.Controls.Add(this.comboBox15);
-            this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.NoSalesButton);
             this.groupBox1.Controls.Add(this.productCategoryButton_category);
             this.groupBox1.Controls.Add(this.productCategoryButton_client);
@@ -138,34 +134,6 @@
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             // 
-            // comboBox14
-            // 
-            this.comboBox14.FormattingEnabled = true;
-            this.comboBox14.Location = new System.Drawing.Point(304, 336);
-            this.comboBox14.Name = "comboBox14";
-            this.comboBox14.Size = new System.Drawing.Size(174, 23);
-            this.comboBox14.TabIndex = 56;
-            // 
-            // comboBox15
-            // 
-            this.comboBox15.FormattingEnabled = true;
-            this.comboBox15.Location = new System.Drawing.Point(304, 307);
-            this.comboBox15.Name = "comboBox15";
-            this.comboBox15.Size = new System.Drawing.Size(174, 23);
-            this.comboBox15.TabIndex = 55;
-            this.comboBox15.DropDown += new System.EventHandler(this.RellenarCliente);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Impact", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(305, 286);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(173, 18);
-            this.label15.TabIndex = 54;
-            this.label15.Text = "Productos comprados por dia";
-            // 
             // NoSalesButton
             // 
             this.NoSalesButton.Location = new System.Drawing.Point(524, 310);
@@ -175,6 +143,7 @@
             this.NoSalesButton.TabIndex = 53;
             this.NoSalesButton.Text = "Productos sin demanda en el mes";
             this.NoSalesButton.UseVisualStyleBackColor = true;
+            this.NoSalesButton.Click += new System.EventHandler(this.ProductosSinDemanda);
             // 
             // productCategoryButton_category
             // 
@@ -227,6 +196,8 @@
             this.clientPurchaseYearComboBox.TabIndex = 48;
             this.clientPurchaseYearComboBox.Text = "RUT";
             this.clientPurchaseYearComboBox.DropDown += new System.EventHandler(this.RellenarCliente);
+            this.clientPurchaseYearComboBox.DropDownClosed += new System.EventHandler(this.ProductosCompradosAnual);
+            this.clientPurchaseYearComboBox.Click += new System.EventHandler(this.ProductosCompradosAnual);
             // 
             // Top5Button
             // 
@@ -237,6 +208,7 @@
             this.Top5Button.TabIndex = 47;
             this.Top5Button.Text = "Top 5 productos de la semana anterior\r\n";
             this.Top5Button.UseVisualStyleBackColor = true;
+            this.Top5Button.Click += new System.EventHandler(this.Top5Semana);
             // 
             // rutTextBox
             // 
@@ -493,9 +465,6 @@
         private global::System.Windows.Forms.Label label11;
         private global::System.Windows.Forms.Label label10;
         private global::System.Windows.Forms.ComboBox clientOrdersButton;
-        private global::System.Windows.Forms.ComboBox comboBox14;
-        private global::System.Windows.Forms.ComboBox comboBox15;
-        private global::System.Windows.Forms.Label label15;
         private global::System.Windows.Forms.Button NoSalesButton;
         private global::System.Windows.Forms.ComboBox productCategoryButton_category;
         private global::System.Windows.Forms.ComboBox productCategoryButton_client;

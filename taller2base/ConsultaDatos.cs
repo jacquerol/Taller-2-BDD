@@ -40,24 +40,21 @@ namespace taller2base
         }
         /**
          * Datos de un vendedor por rut (2) 
-         * #Falta antiguedad
          **/
         public void datosVendedor(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
                 new DataTableDisplay(getTabla(
-                    "SELECT * FROM VENDEDOR WHERE NUMEMPLEADO = '" + box.SelectedItem.ToString() + "'"), 
+                    "SELECT *, ROUND(( DATEDIFF(CURDATE(), VENDEDOR.FECHACONTRATACION))/365,0) AS Antiguedad FROM VENDEDOR WHERE VENDEDOR.NUMEMPLEADO = " + box.SelectedItem.ToString() + ""), 
                     "Datos del vendedor " + box.SelectedItem.ToString());
         }
         /**
          * Los vendedores de mayor antigüedad y los vendedores de menor antigüedad en la empresa (indicar los años de antigüedad) (3) 
-         * #Incompleta
          **/
         public void VendedoresAntiguedad(object sender, EventArgs e)
         {
-            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
-            string query = "Rellenar con query";
-            new DataTableDisplay(getTabla(query), "Datos de " + box.SelectedItem.ToString());
+            string query = "SELECT *, ROUND(( DATEDIFF(CURDATE(), V.FECHACONTRATACION))/365,0) AS Antiguedad FROM VENDEDOR V WHERE V.FECHACONTRATACION = (SELECT MIN(V.FECHACONTRATACION) FROM VENDEDOR V) OR V.FECHACONTRATACION = (SELECT MAX(V.FECHACONTRATACION) FROM VENDEDOR V)";
+            new DataTableDisplay(getTabla(query), "Vendedores de mayor y menor antiguedad");
         }
         /**
          * Datos de una orden de compra, incluyendo el cliente, el vendedor y los productos de la orden (4)
@@ -85,15 +82,13 @@ namespace taller2base
         }
         /**
          * Los proveedores que suministran un producto (7)
-         * #No funciona
          **/
         public void proveedoresDeProducto(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
+            string idProducto = box.SelectedItem.ToString();
             new DataTableDisplay(
-                getTabla("select distinct p.nombre, p.rut from producto inner join suministra on suministra.idproducto = producto.id and producto.id = '" + box.SelectedItem.ToString() +
-                "' inner join proveedor p on p.rut = suministra.rutproveedor"),
-                "Proveedores del producto " + box.SelectedItem.ToString());
+                getTabla("SELECT prov.rut FROM proveedor prov INNER JOIN suministra s ON s.rutProveedor = prov.rut INNER JOIN PRODUCTO ON PRODUCTO.ID = s.idProducto AND PRODUCTO.ID = " + box.SelectedItem.ToString()), "Proveedores de producto "+box.SelectedItem.ToString());
         }
         /**
          * Los productos que suministra un proveedor, indicando el precio y la cantidad (8)
@@ -102,7 +97,7 @@ namespace taller2base
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
             string query =
-                "select producto.precioVenta from proveedor inner join suministra on proveedor.rut = suministra.rutProveedor and proveedor.rut = " + box.SelectedItem.ToString() + " inner join producto on suministra.idProducto = producto.id";
+                "select producto.precioVenta from proveedor inner join suministra on proveedor.rut = suministra.rutProveedor and proveedor.rut = '" + box.SelectedItem.ToString() + "' inner join producto on suministra.idProducto = producto.id";
             new DataTableDisplay(getTabla(query),
                 "Productos del proveedor " + box.SelectedItem.ToString());
         }
@@ -139,9 +134,8 @@ namespace taller2base
          **/
         public void Top5Semana(object sender, EventArgs e)
         {
-            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
-            string query = "Rellenar con query";
-            new DataTableDisplay(getTabla(query), "Datos de  " + box.SelectedItem.ToString());
+            string query = "select prod.id, prod.nombre, op.cantidad from producto prod inner join ordenproducto op on op.idProducto = prod.id inner join orden o on o.idOrden = op.idOrden where WEEK(o.fecha) = WEEK(CURDATE()) group by prod.nombre order by op.cantidad DESC limit 5 ;";
+            new DataTableDisplay(getTabla(query), "Top 5 ultima semana");
         }
         /**
          * Los productos que ha comprado un cierto cliente durante el año, indicar la cantidad de cada producto (13)
@@ -149,7 +143,7 @@ namespace taller2base
         public void ProductosCompradosAnual(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
-            string query = "Rellenar con query";
+            string query = "select distinct prod.nombre, op.cantidad from producto prod inner join ordenproducto op on op.idProducto = prod.id inner join orden o on o.idOrden = op.idOrden where YEAR(o.fecha) = YEAR(CURDATE()) and o.rutCliente = '"+box.SelectedItem.ToString()+"'";
             new DataTableDisplay(getTabla(query), "Datos de " + box.SelectedItem.ToString());
         }
         /**
@@ -167,22 +161,11 @@ namespace taller2base
         }
         /**
         * Los productos que no han participado en órdenes de compra en el último mes (15)
-        * #Incompleta
         **/
         public void ProductosSinDemanda(object sender, EventArgs e)
         {
             ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
-            string query = "Rellenar con query";
-            new DataTableDisplay(getTabla(query), "Datos de " + box.SelectedItem.ToString());
-        }
-        /**
-         * Los productos que fueron comprados por los clientes en un cierto día (16)
-         * #Incompleta
-         **/
-        public void ProductosCompradosPorDia(object sender, EventArgs e)
-        {
-            ComboBox box = (ComboBox)sender; if (!componenteLleno(box)) return;
-            string query = "Rellenar con query";
+            string query = "SELECT * FROM((orden inner join ordenProducto on orden.idOrden = ordenProducto.idOrden) inner join producto on ordenProducto.idProducto = producto.id) WHERE NOT EXISTS(SELECT ORDEN.fecha BETWEEN DATE_ADD(NOW(), INTERVAL - 1 MONTH) AND NOW()); ";
             new DataTableDisplay(getTabla(query), "Datos de " + box.SelectedItem.ToString());
         }
         public void RellenarCliente(object sender, EventArgs e) { RellenarConRegistros((ComboBox)sender, "cliente"); }
