@@ -12,7 +12,7 @@ namespace taller2base
     public partial class DataTableDisplay : Form
     {
         private BindingSource bindingSource = new BindingSource();
-        private Boolean insertData = false; private Boolean updateData = false; string[] columnas; string entidad;
+        public Boolean insertData = false; public Boolean updateData = false; string[] columnas; string entidad;
         public DataTableDisplay(DataTable tabla, string titulo)
         {
             InitializeComponent();
@@ -21,6 +21,7 @@ namespace taller2base
             bindingSource.DataSource = tabla;
             this.Controls.Add(dataGridView);
             this.Show();
+            updateData = false; insertData = false;
         }
         /**
          * Sobrecarga del constructor para realizar queries INSERT
@@ -66,19 +67,18 @@ namespace taller2base
             dataGridView.AutoSizeRowsMode =
                 DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dataGridView.BorderStyle = BorderStyle.Fixed3D;
-            if (this.insertData)
-            {
-                dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
-                sendButton.Show();
-                dataGridView.AllowUserToAddRows = false;
-            }
-            if (this.updateData)
+            if (this.insertData & !this.updateData)
             {
                 dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
                 dataGridView.AllowUserToAddRows = false;
                 sendButton.Show();
             }
-            else sendButton.Hide();
+            else if (this.updateData & !this.insertData)
+            {
+                dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
+                dataGridView.AllowUserToAddRows = false;
+                sendButton.Show();
+            }
         }
         ~DataTableDisplay(){}
         /**
